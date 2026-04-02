@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Font chính -->
+    <font
+        android:font="@font/rufing_personaluse"
+  />
+
+    <!-- Fallback cho ký tự thiếu -->
+    <font
+        android:font="@font/roboto_regular"
+      />
+
+</font-family>

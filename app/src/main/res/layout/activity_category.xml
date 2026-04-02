@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_bg_splash">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imvBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:elevation="1dp"
+            android:src="@drawable/ic_back_app"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<!--        &lt;!&ndash;    native_ads&ndash;&gt;-->
+<!--        <FrameLayout-->
+<!--            android:id="@+id/native_ads"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/imvBack">-->
+
+<!--            <include layout="@layout/ads_native_banner_shimmer" />-->
+<!--        </FrameLayout>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:layout_marginHorizontal="80dp"
+            app:layout_constraintBottom_toBottomOf="@id/imvBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imvBack"
+            android:fontFamily="@font/janda_manatee_solid"
+            android:textColor="@color/app_color"
+            android:textSize="24sp"
+            app:outerStrokeColor="@color/app_color2"
+            app:outerStrokeWidth="2dp"
+            app:outerStrokeJoinStyle="miter"
+            style="@style/single_marquee"
+            android:singleLine="true"
+            android:freezesText="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            tools:itemCount="8"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_category"
+            android:layout_marginHorizontal="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imvBack" />
+<!--        <FrameLayout-->
+<!--            android:id="@+id/flNativeCollab"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

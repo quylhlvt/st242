@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rlParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_bg_splash">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear_language"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctlTop"
+                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvTitle2"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/fredoka_one_regular"
+                    android:freezesText="true"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@string/language"
+                    android:textColor="@color/app_color2"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:outerStrokeColor="@color/app_color2"
+                    app:outerStrokeJoinStyle="miter"
+                    app:outerStrokeWidth="2dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvTitle1"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/fredoka_one_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/language"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/app_color2"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.538"
+                    app:strokeColor="@color/app_color"
+                    app:strokeJoinStyle="miter"
+                    app:strokeMiter="5dp"
+                    app:strokeWidth="2dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icBack"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:elevation="1dp"
+                    android:src="@drawable/ic_back_app"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imvDone"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="12dp"
+                    android:elevation="1dp"
+                    android:gravity="end"
+                    android:src="@drawable/ic_select_language"
+                    android:visibility="invisible"
+                    app:tint="@color/app_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                   />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <FrameLayout-->
+<!--                -->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:elevation="2dp"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/linearLayout"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/linearLayout"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <include-->
+<!--                    android:id="@+id/action_bar"-->
+<!--                    layout="@layout/actionbar_custom" />-->
+<!--            </FrameLayout>-->
+
+
+
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="26dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ctlTop"
+                            android:id="@+id/rcl_language"
+                            android:layout_marginHorizontal="16dp"
+                            tools:itemCount="20"
+                            tools:listitem="@layout/item_language" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        &lt;!&ndash; native_ads &ndash;&gt;-->
+<!--        <FrameLayout-->
+<!--            android:id="@+id/native_ads"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:layout_marginStart="0dp"-->
+<!--            android:layout_marginTop="4dp">-->
+
+<!--            <include layout="@layout/ads_native_big_btn_top_shimmer" />-->
+<!--        </FrameLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

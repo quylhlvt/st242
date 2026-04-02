@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111859859192",
+    "project_id": "st226-cuteanimeavatarmaker",
+    "storage_bucket": "st226-cuteanimeavatarmaker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111859859192:android:9e703b79b8ddaad001050d",
+        "android_client_info": {
+          "package_name": "com.cute.anime.avatarmaker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdztl_Vr8BLg3F2N_kF55uQA_p98TavWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

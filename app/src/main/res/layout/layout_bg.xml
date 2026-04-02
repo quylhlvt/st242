@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_frame_bg_layer_bg">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/titleBg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/spacegrotesk_bold"
+            android:text="@string/background"
+            android:textColor="@color/app_color6"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/titleBg">
+            <LinearLayout
+                android:id="@+id/linearImage"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="1.64:0.32"
+                    android:src="@drawable/img_frame_mywork1"/>
+
+                <ImageView
+                    android:id="@+id/img_image1_1_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintDimensionRatio="1.64:0.30"
+                    android:src="@drawable/img_frame_mywork1_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/janda_manatee_solid"
+                    android:gravity="center"
+                    android:text="@string/image"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    style="@style/single_marquee"
+                    app:layout_constraintTop_toTopOf="@+id/img_image1_1_frame"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_image1_1_frame"
+                    app:outerStrokeColor="@color/app_color"
+                    app:outerStrokeJoinStyle="miter"
+                    app:outerStrokeWidth="1dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:background="@drawable/bg_custom_unchoose"
+                    android:fontFamily="@font/janda_manatee_solid"
+                    android:gravity="center"
+                    android:text="@string/color"
+                    android:textColor="@color/app_color" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+      android:id="@+id/linearColor"
+      android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/btnImage"
+          android:layout_width="match_parent"
+          android:layout_height="32dp"
+          android:layout_marginHorizontal="4dp"
+          android:layout_weight="1"
+          android:textSize="14sp"
+          android:background="@drawable/bg_custom_unchoose"
+          android:fontFamily="@font/janda_manatee_solid"
+          android:gravity="center"
+          android:text="@string/image"
+          android:textColor="@color/app_color" />
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="32dp"
+          android:layout_weight="1"
+          android:layout_marginHorizontal="4dp"
+          android:gravity="center"
+          >
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:scaleType="fitXY"
+              app:layout_constraintDimensionRatio="1.64:0.32"
+              android:src="@drawable/img_frame_mywork1"/>
+
+          <ImageView
+              android:id="@+id/img_color1_1_frame"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:adjustViewBounds="true"
+              android:scaleType="fitXY"
+              android:layout_marginBottom="2dp"
+              app:layout_constraintDimensionRatio="1.64:0.30"
+              android:src="@drawable/img_frame_mywork1_1"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+              android:id="@+id/tv2"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_marginHorizontal="10dp"
+              android:fontFamily="@font/janda_manatee_solid"
+              android:gravity="center"
+              android:text="@string/color"
+              android:textColor="@color/white"
+              android:textSize="16sp"
+              style="@style/single_marquee"
+              app:layout_constraintTop_toTopOf="@+id/img_color1_1_frame"
+              app:layout_constraintBottom_toBottomOf="@+id/img_color1_1_frame"
+              app:outerStrokeColor="@color/app_color"
+              app:outerStrokeJoinStyle="miter"
+              app:outerStrokeWidth="1dp" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llTop"
+            app:layout_constraintVertical_bias="0.0"
+            app:spanCount="5"
+            tools:itemCount="13"
+            tools:layout_editor_absoluteX="8dp"
+            tools:listitem="@layout/item_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvColor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llTop"
+            tools:itemCount="2"
+            android:visibility="gone"
+
+            tools:listitem="@layout/item_color_bg"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Lớp card chính (transparent, giữ bo góc) -->
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="10dp">  <!-- Dịch lên trên 10dp để nhường chỗ cho bóng -->
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- Lớp bóng chỉ ở dưới (offset xuống dưới) -->
+    <item
+        android:top="10dp"
+    android:left="8dp"
+    android:right="8dp"
+    android:bottom="-12dp">
+    <shape android:shape="rectangle">
+        <solid android:color="#33000000" />
+        <corners android:radius="16dp" />
+    </shape>
+</item>
+
+    </layer-list>

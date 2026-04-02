@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_bg_splash">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imvBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:elevation="1dp"
+            android:src="@drawable/ic_back_app"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="100dp"
+            android:textColor="@color/app_color"
+            android:textSize="24sp"
+            android:fontFamily="@font/janda_manatee_solid"
+            android:gravity="center"
+            app:outerStrokeColor="@color/app_color"
+            app:outerStrokeWidth="2dp"
+            app:outerStrokeJoinStyle="miter"
+            style="@style/single_marquee"
+            android:singleLine="true"
+            android:freezesText="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="@string/successfully"
+            app:layout_constraintBottom_toBottomOf="@id/imvBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imvBack"
+
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imvHome"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/imv_home"
+            app:layout_constraintBottom_toBottomOf="@id/imvBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imvBack" />
+        <com.willy.ratingbar.ScaleRatingBar
+            android:id="@+id/ll1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imvBack"
+            app:srb_clearRatingEnabled="false"
+            app:srb_clickable="false"
+            app:srb_drawableEmpty="@drawable/ic_unrate_success"
+            app:srb_drawableFilled="@drawable/ic_rate_success"
+            app:srb_isIndicator="true"
+            app:srb_minimumStars="0"
+            app:srb_numStars="5"
+            app:srb_rating="0"
+            app:srb_scrollable="false"
+            app:srb_starHeight="40dp"
+            app:srb_starPadding="4dp"
+            app:srb_starWidth="40dp"
+            app:srb_stepSize="1" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/constrainStar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll1"
+                android:layout_marginHorizontal="6dp"
+                app:layout_constraintDimensionRatio="3.3:4.3">
+                <FrameLayout
+                    android:id="@+id/frameImage1"
+
+
+                    android:elevation="2dp"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="15dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/frameImage2"
+                    >
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="18.3dp"
+                        app:strokeWidth="0dp"
+                        android:background="@color/transparent"
+                        android:layout_marginHorizontal="10dp"
+                        app:cardBackgroundColor="@color/app_color"
+                        >
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+
+                            >
+
+
+
+                            <FrameLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="18.3dp"
+                                    app:strokeWidth="13dp"
+                                    app:strokeColor="@color/app_color2"
+                                    app:cardBackgroundColor="@color/app_color2"
+                                    android:outlineAmbientShadowColor="#E8C0F5"
+
+                                    >
+
+                                    <!--            imvImage-->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:strokeColor="@color/app_color"
+                                        app:strokeWidth="4dp"
+                                        app:cardBackgroundColor="@color/app_color4"
+                                        android:layout_margin="13dp"
+                                        app:cardCornerRadius="18.3dp">
+
+                                        <ImageView
+                                            android:id="@+id/imgCharacter1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scaleType="centerCrop" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                            </FrameLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frameImage2"
+                    android:layout_width="0dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:layout_height="0dp"
+                    android:elevation="2dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frameImage1">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="18.3dp"
+                        app:strokeWidth="0dp"
+                        android:background="@color/transparent"
+                        android:layout_marginHorizontal="10dp"
+                        app:cardBackgroundColor="@color/app_color"
+                        >
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+
+                            >
+
+
+
+                            <FrameLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="18.3dp"
+                                    app:strokeWidth="13dp"
+                                    app:strokeColor="@color/app_color2"
+                                    app:cardBackgroundColor="@color/app_color2"
+                                    android:outlineAmbientShadowColor="#E8C0F5"
+
+                                    >
+
+                                    <!--            imvImage-->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:strokeColor="@color/app_color"
+                                        app:strokeWidth="4dp"
+                                        app:cardBackgroundColor="@color/app_color4"
+                                        android:layout_margin="13dp"
+                                        app:cardCornerRadius="18.3dp">
+
+                                        <ImageView
+                                            android:id="@+id/imgCharacter2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scaleType="centerCrop" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                            </FrameLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="58dp"
+                    android:src="@drawable/img_vs"
+                    android:elevation="3dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="2.17:1.72"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="58dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/constrainStar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="90dp"
+       android:clipChildren="false"
+       android:clipToPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingHorizontal="16dp"
+       android:layout_marginBottom="80dp"
+                app:layout_constraintDimensionRatio="3.3:0.84">
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/layoutProgress"
+           android:layout_width="0dp"
+           android:layout_height="0dp"
+           android:clipChildren="false"
+           android:clipToPadding="false"
+
+           app:layout_constraintDimensionRatio="3.26:0.42"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+           <!-- 1. Track nền cam - elevation thấp nhất -->
+           <ImageView
+               android:id="@+id/progressTrack"
+               android:layout_width="0dp"
+               android:layout_height="0dp"
+               android:elevation="0dp"
+               android:scaleType="fitXY"
+               app:layout_constraintDimensionRatio="3.26:0.26"
+               android:src="@drawable/bg_progress_track_success"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <!-- 2. Fill tím rectangle - trượt từ dưới lên -->
+           <ImageView
+               android:id="@+id/progressFill"
+               android:layout_width="0dp"
+               android:layout_height="0dp"
+               android:layout_marginStart="18dp"
+               android:elevation="1dp"
+               android:scaleType="fitXY"
+               android:scaleY="0"
+               android:layout_marginVertical="2dp"
+               android:src="@drawable/bg_progress_match_success"
+               app:layout_constraintBottom_toBottomOf="@id/progressTrack"
+               app:layout_constraintEnd_toEndOf="@id/progressTrack"
+               app:layout_constraintStart_toStartOf="@id/progressTrack"
+               app:layout_constraintTop_toTopOf="@id/progressTrack" />
+
+           <!-- 3. Bottom cố định ở đáy - đè lên fill -->
+           <ImageView
+               android:id="@+id/progressTrackBottom"
+               android:layout_width="17dp"
+               android:layout_height="0dp"
+               android:adjustViewBounds="true"
+               android:elevation="2dp"
+               android:scaleType="fitXY"
+               android:src="@drawable/ic_progress_track_start"
+               android:translationX="2dp"
+               android:layout_marginVertical="2dp"
+               app:layout_constraintBottom_toBottomOf="@id/progressTrack"
+             app:layout_constraintTop_toTopOf="@+id/progressTrack"
+               app:layout_constraintStart_toStartOf="@+id/progressTrack" />
+
+           <!-- 4. Sao - elevation cao nhất, bám đỉnh fill -->
+           <ImageView
+               android:id="@+id/imgStar"
+               android:layout_width="40dp"
+               android:layout_height="41dp"
+               android:elevation="3dp"
+               android:src="@drawable/ic_star_success"
+               android:translationX="-5dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent" />
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <TextView
+           android:id="@+id/tvMatchPercent"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:textColor="@color/app_color"
+           android:textSize="22sp"
+           android:fontFamily="@font/hvd_comic_serif_pro"
+           android:layout_marginTop="12dp"
+           app:layout_constraintTop_toBottomOf="@+id/layoutProgress"
+           tools:layout_editor_absoluteX="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- native_ads -->
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/native_ads"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="4dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            >-->
+
+        <!--            <include layout="@layout/ads_native_big_btn_bottom_shimmer" />-->
+        <!--        </FrameLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

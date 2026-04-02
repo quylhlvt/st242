@@ -1,0 +1,397 @@
+
+    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <data>
+
+        </data>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cosplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_bg_splash">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imvBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="60dp"
+                android:elevation="2dp"
+                android:src="@drawable/ic_back_app"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imvGuide"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="60dp"
+                android:elevation="1dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_guide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleRandom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/janda_manatee_solid"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+
+                style="@style/single_marquee"
+                android:singleLine="true"
+                android:freezesText="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:gravity="center"
+                android:text="@string/cosplay"
+                android:textColor="@color/app_color"
+                android:textSize="24sp"
+
+                app:layout_constraintBottom_toBottomOf="@id/imvBack"
+                app:layout_constraintEnd_toStartOf="@+id/imvGuide"
+                app:layout_constraintStart_toEndOf="@id/imvBack"
+                app:layout_constraintTop_toTopOf="@id/imvBack" />
+
+            <!-- Character Image Container -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCharacter"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="50dp"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imvBack">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="32dp"
+                        app:strokeWidth="0dp"
+                        android:background="@color/transparent"
+                        android:layout_marginHorizontal="10dp"
+                        app:cardBackgroundColor="@color/app_color"
+                        >
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+
+                            >
+
+
+
+                            <FrameLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="32dp"
+                                    app:strokeWidth="20dp"
+                                    app:strokeColor="@color/app_color2"
+                                    app:cardBackgroundColor="@color/app_color2"
+                                    android:outlineAmbientShadowColor="#E8C0F5"
+
+                                    >
+
+                                    <!--            imvImage-->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:strokeColor="@color/app_color"
+                                        app:strokeWidth="4dp"
+                                        app:cardBackgroundColor="@color/app_color4"
+                                        android:layout_margin="20dp"
+                                        app:cardCornerRadius="30dp">
+
+                                        <ImageView
+                                            android:id="@+id/imgCharacter"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scaleType="centerCrop" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                            </FrameLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- Loading Progress -->
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/app_color" />
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnRandomize"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintDimensionRatio="1.56:0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCosplay"
+                app:layout_constraintTop_toBottomOf="@+id/cardCharacter">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/bg_view_mywork" />
+
+                <ImageView
+                    android:id="@+id/img_share1_1_frame"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/bg_view_bottom1_mywork"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintDimensionRatio="1.37:0.31"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+                <ImageView
+                    android:id="@+id/img_random"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="3dp"
+                    android:layout_marginStart="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_random_btn_randomone"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_share1_1_frame"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="@+id/img_share1_1_frame"
+                    app:layout_constraintTop_toTopOf="@+id/img_share1_1_frame" />
+
+
+                <TextView
+                    android:id="@+id/tv1"
+                    style="@style/single_marquee"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/janda_manatee_solid"
+                    android:gravity="center"
+                    android:text="@string/random"
+                    android:textColor="@color/app_color"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_share1_1_frame"
+                    app:layout_constraintEnd_toEndOf="@+id/img_share1_1_frame"
+                    app:layout_constraintStart_toEndOf="@+id/img_random"
+                    app:layout_constraintTop_toTopOf="@+id/img_share1_1_frame"
+                    app:outerStrokeColor="@color/app_color"
+                    app:outerStrokeJoinStyle="miter"
+                    app:outerStrokeWidth="1dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnCosplay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintDimensionRatio="1.56:0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnRandomize"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/cardCharacter">
+
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/bg_view_mywork" />
+
+                <ImageView
+                    android:id="@+id/img_cosplay1_1_frame"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/bg_view_bottom1_mywork"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintDimensionRatio="1.37:0.31"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                <ImageView
+                    android:id="@+id/img_cosplay"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="3dp"
+                    android:layout_marginStart="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_random_btn_randomone"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_cosplay1_1_frame"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="@+id/img_cosplay1_1_frame"
+                    app:layout_constraintTop_toTopOf="@+id/img_cosplay1_1_frame" />
+
+
+                <TextView
+                    android:id="@+id/tv2"
+                    style="@style/single_marquee"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/janda_manatee_solid"
+                    android:gravity="center"
+                    android:text="@string/cosplay"
+                    android:textColor="@color/app_color"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_cosplay1_1_frame"
+                    app:layout_constraintEnd_toEndOf="@+id/img_cosplay1_1_frame"
+                    app:layout_constraintStart_toEndOf="@+id/img_cosplay"
+                    app:layout_constraintTop_toTopOf="@+id/img_cosplay1_1_frame"
+                    app:outerStrokeColor="@color/app_color"
+                    app:outerStrokeJoinStyle="miter"
+                    app:outerStrokeWidth="1dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Random Button -->
+
+            <!--        &lt;!&ndash;    flNativeCollab&ndash;&gt;-->
+            <!--        <FrameLayout-->
+            <!--            android:id="@+id/flNativeCollab"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            app:layout_constraintBottom_toBottomOf="parent" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+        android:id="@+id/dialog_coplay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        android:background="@color/black2"
+        >
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/single_marquee"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_marginBottom="-40dp"
+                android:background="@drawable/bg_title_dialog_loading"
+                android:elevation="2dp"
+                android:fontFamily="@font/janda_manatee_solid"
+                android:gravity="center"
+                android:paddingHorizontal="15dp"
+                android:text="@string/instruction"
+                android:textColor="@color/app_color"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                app:layout_constraintDimensionRatio="1.6:0.68"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:strokeJoinStyle="miter" />
+        <ImageView
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/linearDialog"
+            app:layout_constraintStart_toStartOf="@+id/linearDialog"
+            app:layout_constraintEnd_toEndOf="@+id/linearDialog"
+            app:layout_constraintBottom_toBottomOf="@+id/linearDialog"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_dialog_cosplay"/>
+
+        <LinearLayout
+            android:id="@+id/linearDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16sp"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtContentCosplay"
+                android:layout_marginVertical="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hvd_comic_serif_pro"
+                android:gravity="center"
+                android:textSize="16sp"/>
+        </LinearLayout>
+            <ImageView
+                android:id="@+id/btnCancel"
+                android:layout_marginTop="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_close_dialog_cosplay"
+                app:layout_constraintTop_toBottomOf="@+id/linearDialog"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+    </layout>
