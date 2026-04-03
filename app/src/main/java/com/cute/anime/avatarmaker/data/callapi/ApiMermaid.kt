@@ -4,6 +4,6 @@ import com.cute.anime.avatarmaker.data.model.CharacterResponse
 import retrofit2.http.GET
 
 interface ApiMermaid {
-    @GET("api/app/ST226_CuteAnimeAvatarMaker")
+    @GET("api/app/st225_couplemakerkisscreator")
     suspend fun getAllData(): CharacterResponse
 }

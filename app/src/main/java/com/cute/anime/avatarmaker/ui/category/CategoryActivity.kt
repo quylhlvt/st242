@@ -180,27 +180,32 @@ class CategoryActivity : AbsBaseActivity<ActivityCategoryBinding>() {
                                     true
                                 )
 
+                                val minYPerCharType = dataModel.bodyPart
+                                    .groupBy { it.charType }
+                                    .mapValues { (_, parts) ->
+                                        parts.mapNotNull { bp ->
+                                            bp.icon.substringBeforeLast("/").substringAfterLast("/")
+                                                .split("-").getOrNull(1)?.toIntOrNull()
+                                        }.minOrNull() ?: Int.MAX_VALUE
+                                    }
+
                                 dataModel.bodyPart.forEach { mbodyPath ->
-                                    if (mbodyPath.icon.substringBeforeLast("/")
-                                            .substringAfterLast("/").substringAfter("-") == "1"
-                                    ) {
-                                        mbodyPath.listPath.forEach { colorModel ->
-                                            // ✅ Check isNotEmpty
-                                            if (colorModel.listPath.isNotEmpty() && colorModel.listPath[0] != "dice") {
-                                                colorModel.listPath.add(0, "dice")
-                                            }
-                                        }
-                                    } else {
-                                        mbodyPath.listPath.forEach { colorModel ->
-                                            // ✅ Check isNotEmpty
-                                            if (colorModel.listPath.isNotEmpty() && colorModel.listPath[0] != "none") {
+                                    val folderY = mbodyPath.icon.substringBeforeLast("/").substringAfterLast("/")
+                                        .split("-").getOrNull(1)?.toIntOrNull() ?: Int.MAX_VALUE
+                                    val minY = minYPerCharType[mbodyPath.charType] ?: Int.MAX_VALUE
+                                    val isFirstNav = (folderY == minY)
+                                    mbodyPath.listPath.forEach { colorModel ->
+                                        if (colorModel.listPath.isEmpty()) return@forEach
+                                        if (isFirstNav) {
+                                            if (colorModel.listPath[0] != "dice") colorModel.listPath.add(0, "dice")
+                                        } else {
+                                            if (colorModel.listPath[0] != "none") {
                                                 colorModel.listPath.add(0, "none")
                                                 colorModel.listPath.add(1, "dice")
                                             }
                                         }
                                     }
                                 }
-
                                 newOnlineDataList.add(dataModel)
                             }
 

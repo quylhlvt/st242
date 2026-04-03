@@ -85,32 +85,34 @@ class SplashActivity : AbsBaseActivity<ActivitySplashBinding>() {
                                 sortedMap.forEach { key, list ->
                                     val bodyPartList = arrayListOf<BodyPartModel>()
                                     list.forEach { x10 ->
-                                        // ✅ Skip item quantity = 0
                                         if (x10.quantity <= 0) return@forEach
+
+                                        // ✅ Parse x, y, charType từ parts (format: "x-y-charType")
+                                        val partSegs = x10.parts.split("-")
+                                        val partX = partSegs.getOrNull(0)?.toIntOrNull() ?: 0
+                                        val partY = partSegs.getOrNull(1)?.toIntOrNull() ?: 0
+                                        val partCharType = partSegs.getOrNull(2)?.toIntOrNull() ?: 1
 
                                         val colorList = arrayListOf<ColorModel>()
                                         val thumbList = arrayListOf<String>()
-
                                         val halfQuantity = maxOf(1, x10.quantity / 2)
-
-
 
                                         if (x10.colorArray.isEmpty()) {
                                             for (i in 1..halfQuantity) {
-                                            thumbList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/thumb_${i}.png")
-                                        }
+                                                thumbList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/thumb_${i}.png")
+                                            }
                                             val pathList = arrayListOf<String>()
                                             for (i in 1..halfQuantity) {
                                                 pathList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${i}.png")
                                             }
                                             colorList.add(ColorModel("", pathList))
                                         } else {
-                                            for (i in 1..halfQuantity*2+1) {
+                                            for (i in 1..halfQuantity * 2 + 1) {
                                                 thumbList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/thumb_${i}.png")
                                             }
                                             x10.colorArray.split(",").forEach { color ->
                                                 val pathList = arrayListOf<String>()
-                                                for (i in 1..x10.quantity) {  // ✅ có màu → full quantity
+                                                for (i in 1..x10.quantity) {
                                                     pathList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${color}/${i}.png")
                                                 }
                                                 colorList.add(ColorModel(color, pathList))
@@ -119,9 +121,11 @@ class SplashActivity : AbsBaseActivity<ActivitySplashBinding>() {
 
                                         bodyPartList.add(
                                             BodyPartModel(
+                                                // ✅ icon path dùng parts gốc (có đủ x-y-charType)
                                                 "${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/${x10.parts}/nav.png",
                                                 colorList,
-                                                thumbList
+                                                thumbList,
+                                                charType = partCharType  // ✅ truyền charType đúng
                                             )
                                         )
                                     }
@@ -132,28 +136,35 @@ class SplashActivity : AbsBaseActivity<ActivitySplashBinding>() {
                                         true
                                     )
 
-                                    // ✅ SAU - thêm isNotEmpty() giống SplashActivity
+                                    // ✅ Thay thế block forEach mbodyPath cũ
+                                    val minYPerCharType = dataModel.bodyPart
+                                        .groupBy { it.charType }
+                                        .mapValues { (_, parts) ->
+                                            parts.mapNotNull { bp ->
+                                                bp.icon.substringBeforeLast("/").substringAfterLast("/")
+                                                    .split("-").getOrNull(1)?.toIntOrNull()
+                                            }.minOrNull() ?: Int.MAX_VALUE
+                                        }
+
                                     dataModel.bodyPart.forEach { mbodyPath ->
-                                        if (mbodyPath.icon.substringBeforeLast("/")
-                                                .substringAfterLast("/").substringAfter("-") == "1"
-                                        ) {
-                                            mbodyPath.listPath.forEach {
-                                                if (it.listPath.isNotEmpty() && it.listPath[0] != "dice") {
-                                                    it.listPath.add(0, "dice")
-                                                }
-                                            }
-                                        } else {
-                                            mbodyPath.listPath.forEach {
-                                                if (it.listPath.isNotEmpty() && it.listPath[0] != "none") {
-                                                    it.listPath.add(0, "none")
-                                                    it.listPath.add(1, "dice")
+                                        val folderY = mbodyPath.icon.substringBeforeLast("/").substringAfterLast("/")
+                                            .split("-").getOrNull(1)?.toIntOrNull() ?: Int.MAX_VALUE
+                                        val minY = minYPerCharType[mbodyPath.charType] ?: Int.MAX_VALUE
+                                        val isFirstNav = (folderY == minY)
+                                        mbodyPath.listPath.forEach { colorModel ->
+                                            if (colorModel.listPath.isEmpty()) return@forEach
+                                            if (isFirstNav) {
+                                                if (colorModel.listPath[0] != "dice") colorModel.listPath.add(0, "dice")
+                                            } else {
+                                                if (colorModel.listPath[0] != "none") {
+                                                    colorModel.listPath.add(0, "none")
+                                                    colorModel.listPath.add(1, "dice")
                                                 }
                                             }
                                         }
                                     }
 
                                     DataHelper.arrBlackCentered.add(0, dataModel)
-                                    preloadFirstCharacterImages()
                                 }
                             }
                         }

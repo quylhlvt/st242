@@ -122,17 +122,21 @@ class MainActivity : AbsBaseActivity<ActivityMainBinding>() {
                             sortedMap.forEach { key, list ->
                                 var a = arrayListOf<BodyPartModel>()
                                 list.forEachIndexed { index, x10 ->
+                                    // ✅ Lấy charType từ parts
+                                    val partSegs = x10.parts.split("-")
+                                    val partCharType = partSegs.getOrNull(2)?.toIntOrNull() ?: 1
+
                                     var b = arrayListOf<ColorModel>()
                                     x10.colorArray.split(",").forEach { coler ->
                                         var c = arrayListOf<String>()
                                         if (coler == "") {
-                                            val halfQuantity = maxOf(1, x10.quantity / 2)  // ✅ không có màu → chia 2
+                                            val halfQuantity = maxOf(1, x10.quantity / 2)
                                             for (i in 1..halfQuantity) {
                                                 c.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${i}.png")
                                             }
                                             b.add(ColorModel("#", c))
                                         } else {
-                                            for (i in 1..x10.quantity) {  // ✅ có màu → full quantity
+                                            for (i in 1..x10.quantity) {
                                                 c.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${coler}/${i}.png")
                                             }
                                             b.add(ColorModel(coler, c))
@@ -141,7 +145,8 @@ class MainActivity : AbsBaseActivity<ActivityMainBinding>() {
                                     a.add(
                                         BodyPartModel(
                                             "${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/${x10.parts}/nav.png",
-                                            b
+                                            b,
+                                            charType = partCharType  // ✅
                                         )
                                     )
                                 }

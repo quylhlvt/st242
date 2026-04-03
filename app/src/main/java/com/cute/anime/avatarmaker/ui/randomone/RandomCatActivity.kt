@@ -100,49 +100,95 @@ class RandomCatActivity : AbsBaseActivity<ActivityRandomCatBinding>() {
                     LoadingStatus.Loading -> { checkCallingDataOnline = true }
 
                     LoadingStatus.Success -> {
-                        if (DataHelper.arrBlackCentered.isNotEmpty() && !DataHelper.arrBlackCentered[0].checkDataOnline) {
+                        var hasOnlineData = false
+                        DataHelper.arrBlackCentered.forEach {
+                            if (it.checkDataOnline) { hasOnlineData = true; return@forEach }
+                        }
+
+                        if (!hasOnlineData) {
                             checkCallingDataOnline = false
                             val listA = (it as DataResponse.DataSuccess).body ?: return@observe
                             checkCallingDataOnline = true
+
                             val sortedMap = listA.toList()
                                 .sortedBy { (_, list) -> list.firstOrNull()?.level ?: Int.MAX_VALUE }
                                 .toMap()
+
+                            val newOnlineDataList = arrayListOf<CustomModel>()
+
                             sortedMap.forEach { key, list ->
-                                val a = arrayListOf<BodyPartModel>()
+                                val bodyPartList = arrayListOf<BodyPartModel>()
+
                                 list.forEach { x10 ->
                                     if (x10.quantity <= 0) return@forEach
-                                    val b = arrayListOf<ColorModel>()
+
+                                    val colorList = arrayListOf<ColorModel>()
                                     val halfQuantity = maxOf(1, x10.quantity / 2)
-                                    x10.colorArray.split(",").forEach { coler ->
-                                        val c = arrayListOf<String>()
-                                        if (coler == "") {
+
+                                    x10.colorArray.split(",").forEach { color ->
+                                        val pathList = arrayListOf<String>()
+                                        if (color == "") {
                                             for (i in 1..halfQuantity)
-                                                c.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${i}.png")
-                                            b.add(ColorModel("#", c))
+                                                pathList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${i}.png")
+                                            colorList.add(ColorModel("#", pathList))
                                         } else {
                                             for (i in 1..halfQuantity)
-                                                c.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${coler}/${i}.png")
-                                            b.add(ColorModel(coler, c))
+                                                pathList.add(CONST.BASE_URL + "${CONST.BASE_CONNECT}/${x10.position}/${x10.parts}/${color}/${i}.png")
+                                            colorList.add(ColorModel(color, pathList))
                                         }
                                     }
-                                    a.add(BodyPartModel("${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/${x10.parts}/nav.png", b))
+
+                                    bodyPartList.add(
+                                        BodyPartModel(
+                                            "${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/${x10.parts}/nav.png",
+                                            colorList
+                                        )
+                                    )
                                 }
-                                val dataModel = CustomModel("${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/avatar.png", a, true)
+
+                                val dataModel = CustomModel(
+                                    "${CONST.BASE_URL}${CONST.BASE_CONNECT}$key/avatar.png",
+                                    bodyPartList,
+                                    true
+                                )
+
+                                val minYPerCharType = dataModel.bodyPart
+                                    .groupBy { it.charType }
+                                    .mapValues { (_, parts) ->
+                                        parts.mapNotNull { bp ->
+                                            bp.icon.substringBeforeLast("/").substringAfterLast("/")
+                                                .split("-").getOrNull(1)?.toIntOrNull()
+                                        }.minOrNull() ?: Int.MAX_VALUE
+                                    }
+
                                 dataModel.bodyPart.forEach { mbodyPath ->
-                                    if (mbodyPath.icon.substringBeforeLast("/").substringAfterLast("/").substringAfter("-") == "1") {
-                                        mbodyPath.listPath.forEach {
-                                            if (it.listPath.isNotEmpty() && it.listPath[0] != "dice") it.listPath.add(0, "dice")
-                                        }
-                                    } else {
-                                        mbodyPath.listPath.forEach {
-                                            if (it.listPath.isNotEmpty() && it.listPath[0] != "none") {
-                                                it.listPath.add(0, "none"); it.listPath.add(1, "dice")
+                                    val folderY = mbodyPath.icon.substringBeforeLast("/").substringAfterLast("/")
+                                        .split("-").getOrNull(1)?.toIntOrNull() ?: Int.MAX_VALUE
+                                    val minY = minYPerCharType[mbodyPath.charType] ?: Int.MAX_VALUE
+                                    val isFirstNav = (folderY == minY)
+                                    mbodyPath.listPath.forEach { colorModel ->
+                                        if (colorModel.listPath.isEmpty()) return@forEach
+                                        if (isFirstNav) {
+                                            if (colorModel.listPath[0] != "dice") colorModel.listPath.add(0, "dice")
+                                        } else {
+                                            if (colorModel.listPath[0] != "none") {
+                                                colorModel.listPath.add(0, "none")
+                                                colorModel.listPath.add(1, "dice")
                                             }
                                         }
                                     }
                                 }
-                                DataHelper.arrBlackCentered.add(0, dataModel)
+
+                                newOnlineDataList.add(dataModel)
                             }
+
+                            val currentOfflineData = DataHelper.arrBlackCentered
+                                .filter { !it.checkDataOnline }
+                                .distinctBy { it.avt }
+
+                            DataHelper.arrBlackCentered.clear()
+                            newOnlineDataList.reversed().forEach { DataHelper.arrBlackCentered.add(it) }
+                            DataHelper.arrBlackCentered.addAll(currentOfflineData)
                         }
                         checkCallingDataOnline = false
                     }
