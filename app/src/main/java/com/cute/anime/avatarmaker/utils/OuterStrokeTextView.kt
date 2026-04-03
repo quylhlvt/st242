@@ -93,13 +93,14 @@ class OuterStrokeTextView : AppCompatTextView {
             val paint = paint
 
             paint.isAntiAlias = true
+            paint.isSubpixelText = true
             paint.strokeJoin = outerStrokeJoin
             paint.strokeMiter = strokeMiter
             paint.strokeCap = Paint.Cap.BUTT
 
             // Lớp 1: Stroke ngoài (màu tối) + shadow
             paint.style = Paint.Style.STROKE
-            paint.strokeWidth = outerStrokeWidth * dp(1)
+            paint.strokeWidth = outerStrokeWidth * dp(1.2)
             setTextColor(outerStrokeColor)
             if (savedShadowColor != 0) {
                 paint.setShadowLayer(savedShadowRadius, savedShadowDx, savedShadowDy, savedShadowColor)

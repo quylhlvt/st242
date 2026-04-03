@@ -181,7 +181,7 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityMyCreationBinding>() 
                                                     this@MyCreationActivity,
                                                     CustomviewActivity::class.java
                                                 ).putExtra("data", index)
-                                                    .putExtra("arr", toList(avatar.arr))
+                                                    .putExtra("arr", avatar.arr)
                                                     .putExtra("checkEdit", true)
                                                     .putExtra("isFlipped", avatar.isFlipped)
                                                     .putExtra("fileName", File(avatar.path).name)

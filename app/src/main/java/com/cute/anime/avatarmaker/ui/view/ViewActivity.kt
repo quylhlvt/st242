@@ -243,7 +243,7 @@ class ViewActivity : AbsBaseActivity<ActivityViewBinding>() {
                                                 applicationContext,
                                                 CustomviewActivity::class.java
                                             ).putExtra("data", index)
-                                                .putExtra("arr", toList(avatar.arr))
+                                                .putExtra("arr", avatar.arr)
                                                 .putExtra("isFlipped", avatar.isFlipped)
                                                 .putExtra("fileName", File(avatar.path).name)
                                         )

@@ -125,14 +125,15 @@
                             android:id="@+id/tv1"
                             style="@style/single_marquee"
                             android:layout_width="0dp"
+                            android:letterSpacing="0.06"
                             android:gravity="center"
                             android:layout_height="0dp"
                             android:elevation="2dp"
                             android:fontFamily="@font/fredoka_one_regular"
-                            android:shadowColor="#241C39"
+                            android:shadowColor="@color/showdown_olive"
                             android:shadowDx="2"
-                            android:shadowDy="10"
-                            android:shadowRadius="1"
+                            android:shadowDy="5"
+                            android:shadowRadius="2"
                             android:text="@string/pony_maker"
                             android:textColor="@color/white"
                             android:textSize="24sp"
@@ -142,7 +143,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:outerStrokeColor="@color/app_color2"
-                            app:outerStrokeWidth="1.2dp" />
+                            app:outerStrokeWidth="1.6dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,14 +173,15 @@
                             style="@style/single_marquee"
                             android:layout_width="0dp"
                             android:paddingEnd="2dp"
+                            android:letterSpacing="0.06"
                             android:gravity="center"
                             android:layout_height="0dp"
                             android:elevation="2dp"
                             android:fontFamily="@font/fredoka_one_regular"
-                            android:shadowColor="#241C39"
+                            android:shadowColor="@color/showdown_olive"
                             android:shadowDx="2"
-                            android:shadowDy="10"
-                            android:shadowRadius="1"
+                            android:shadowDy="5"
+                            android:shadowRadius="2"
                             android:text="@string/cosplay_nuggts"
                             android:textColor="@color/white"
                             android:textSize="24sp"
@@ -189,7 +191,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:outerStrokeColor="@color/app_color2"
-                            app:outerStrokeWidth="1.2dp" />
+                            app:outerStrokeWidth="1.6dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -222,12 +224,13 @@
                             android:gravity="center"
                             android:paddingStart="2dp"
                             android:layout_height="0dp"
+                            android:letterSpacing="0.06"
                             android:elevation="2dp"
                             android:fontFamily="@font/fredoka_one_regular"
-                            android:shadowColor="#241C39"
+                            android:shadowColor="@color/showdown_olive"
                             android:shadowDx="2"
-                            android:shadowDy="10"
-                            android:shadowRadius="1"
+                            android:shadowDy="5"
+                            android:shadowRadius="2"
                             android:text="@string/random_cat"
                             android:textColor="@color/white"
                             android:textSize="24sp"
@@ -237,7 +240,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:outerStrokeColor="@color/app_color2"
-                            app:outerStrokeWidth="1.2dp" />
+                            app:outerStrokeWidth="1.6dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -268,13 +271,14 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:elevation="2dp"
+                            android:letterSpacing="0.06"
                             android:gravity="center"
                             android:fontFamily="@font/fredoka_one_regular"
                             android:paddingStart="2dp"
-                            android:shadowColor="#241C39"
+                            android:shadowColor="@color/showdown_olive"
                             android:shadowDx="2"
-                            android:shadowDy="10"
-                            android:shadowRadius="1"
+                            android:shadowDy="5"
+                            android:shadowRadius="2"
                             app:outerStrokeJoinStyle="miter"
                             android:text="@string/my_avatar"
                             android:textColor="@color/white"
@@ -285,7 +289,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:outerStrokeColor="@color/app_color2"
-                            app:outerStrokeWidth="1.2dp" />
+                            app:outerStrokeWidth="1.6dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

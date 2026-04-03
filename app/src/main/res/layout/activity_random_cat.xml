@@ -127,11 +127,12 @@
                                     app:strokeColor="@color/app_color"
                                     app:strokeWidth="4dp">
 
+
                                     <ImageView
                                         android:id="@+id/imgCharacter"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:scaleType="centerCrop" />
+                                        android:scaleType="fitCenter" />
 
                                 </com.google.android.material.card.MaterialCardView>
 

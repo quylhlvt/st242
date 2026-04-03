@@ -43,6 +43,17 @@
             app:layout_constraintBottom_toBottomOf="@id/imvBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/imvBack" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnSwitchCharacter"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:adjustViewBounds="true"
+            android:elevation="5dp"
+            android:src="@drawable/ic_flip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSave" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewShowImage"
             android:visibility="invisible"
@@ -364,14 +375,14 @@
             android:id="@+id/rl"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="5dp"
             android:elevation="0dp"
             android:visibility="visible"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+            app:layout_constraintTop_toBottomOf="@+id/btnSwitchCharacter" />
 
         <!--        <androidx.appcompat.widget.AppCompatImageView-->
         <!--            android:id="@+id/btnDice"-->
@@ -486,9 +497,56 @@
                     app:layout_constraintBottom_toBottomOf="@+id/relative"
                     app:layout_constraintEnd_toEndOf="parent" />
             </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/relativeLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/app_color3"
+                app:strokeColor="@color/app_color"
+                app:strokeWidth="1dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/relative2"
+                    android:layout_marginEnd="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="8dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvColor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="4dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_color" />
+                </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imvEndColor2"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/img_back_color"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toEndOf="@+id/relative"
+                    app:layout_constraintTop_toTopOf="@+id/relative"
+                    app:layout_constraintBottom_toBottomOf="@+id/relative"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/llPart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -510,9 +568,22 @@
                 app:spanCount="5"
                 tools:itemCount="20"
                 tools:listitem="@layout/item_part" />
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvPart2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="14dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_part" />
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/llNav"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -530,7 +601,18 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_navigation" />
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvNav2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_navigation" />
+        </FrameLayout>
         <LinearLayout
             android:visibility="gone"
             android:elevation="5dp"

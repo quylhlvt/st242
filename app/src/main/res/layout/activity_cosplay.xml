@@ -150,12 +150,12 @@
 
 
                     <!-- Loading Progress -->
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_gravity="center"
-                        android:indeterminateTint="@color/app_color" />
+<!--                    <ProgressBar-->
+<!--                        android:id="@+id/progressBar"-->
+<!--                        android:layout_width="64dp"-->
+<!--                        android:layout_height="64dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:indeterminateTint="@color/app_color" />-->
 
                 </FrameLayout>
 
