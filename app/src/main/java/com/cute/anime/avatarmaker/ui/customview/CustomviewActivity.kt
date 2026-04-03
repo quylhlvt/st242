@@ -47,6 +47,7 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
     val adapterColor by lazy {
         ColorAdapter()
     }
+
     val adapterNav by lazy {
         NavAdapter(this@CustomviewActivity)
     }
@@ -67,12 +68,11 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
     private val iconToIndexMap = mutableMapOf<String, Int>()
     private fun getThumbList(navPos: Int, actualList: List<String>): List<String> {
         val thumbList = listData[navPos].listThumbPath
-        // map 1-1: special item giữ nguyên, còn lại lấy thumb tương ứng
         var thumbIndex = 0
         return actualList.map { path ->
             when (path) {
-                "none", "dice" -> path // special item không có thumb
-                else -> thumbList.getOrElse(thumbIndex++) { path } // lấy thumb, fallback về path gốc
+                "none", "dice" -> path
+                else -> thumbList.getOrElse(thumbIndex++) { path }
             }
         }
     }
@@ -351,50 +351,121 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
         arrIntHottrend = intent.getSerializableExtra("arr") as? ArrayList<ArrayList<Int>>
         var checkFirst = true
 
-        repeat(DataHelper.arrBlackCentered[blackCentered].bodyPart.size) {
+        val activeBodyParts = DataHelper.getNavItemsForActiveCharacter()
+        val currentCat = activeBodyParts.getOrNull(blackCentered)
+            ?: DataHelper.arrBlackCentered.getOrNull(blackCentered)
+            ?: return
+
+        // ✅ FIX: Dùng x từ folder nhưng remap lại thành local index
+        // Bước 1: thu thập tất cả x values của character hiện tại, sort
+        data class BodyPartEntry(val icon: String, val x: Int, val y: Int)
+        val entries = mutableListOf<BodyPartEntry>()
+
+        currentCat.bodyPart.forEach { bodyPart ->
+            val parts = bodyPart.icon
+                .substringBeforeLast("/")
+                .substringAfterLast("/")
+                .split("-")
+            val x = parts.getOrNull(0)?.toIntOrNull() ?: return@forEach
+            val y = parts.getOrNull(1)?.toIntOrNull() ?: return@forEach
+            entries.add(BodyPartEntry(bodyPart.icon, x, y))
+        }
+
+        // Bước 2: sort theo x để giữ thứ tự layer đúng
+        entries.sortBy { it.x }
+        val listSize = entries.size
+
+        // Bước 3: resize lists
+        repeat(listSize) {
             DataHelper.listImageSortView.add("")
             DataHelper.listImage.add("")
         }
 
-        val listSize = DataHelper.listImageSortView.size  // ✅ cache size
+        // Bước 4: map x → local index (0-based, liên tục)
+        // x có thể là 1,2,3...15 (char1) hoặc 16,17...23 (char2)
+        // → cần remap về 0,1,2...N
+        val xValues = entries.map { it.x }.sorted().distinct()
+        val xToLocalIndex = xValues.mapIndexed { localIdx, xVal -> xVal to localIdx }.toMap()
+        val yValues = entries.map { it.y }.sorted().distinct()
+        val yToLocalIndex = yValues.mapIndexed { localIdx, yVal -> yVal to localIdx }.toMap()
 
-        DataHelper.arrBlackCentered[blackCentered].bodyPart.forEach {
-            val (x, y) = it.icon.substringBeforeLast("/").substringAfterLast("/").split("-")
-                .map { it.toInt() }
-
-            // ✅ Chỉ set nếu index hợp lệ
-            if (x - 1 < listSize) DataHelper.listImageSortView[x - 1] = it.icon
-            if (y - 1 < listSize) DataHelper.listImage[y - 1] = it.icon
-            iconToIndexMap[it.icon] = x - 1
+        entries.forEach { entry ->
+            val localX = xToLocalIndex[entry.x] ?: return@forEach
+            val localY = yToLocalIndex[entry.y] ?: return@forEach
+            if (localX < listSize) DataHelper.listImageSortView[localX] = entry.icon
+            if (localY < listSize) DataHelper.listImage[localY] = entry.icon
+            // ✅ iconToIndexMap dùng localX (0-based, liên tục)
+            iconToIndexMap[entry.icon] = localX
         }
 
         DataHelper.listImage.forEachIndexed { index, icon ->
-            val x = arrBlackCentered[blackCentered].bodyPart.indexOfFirst { it.icon == icon }
-            val y = DataHelper.listImageSortView.indexOf(icon)
-            if (x != -1) {
-                arrShowColor.add(true)
-                listData.add(arrBlackCentered[blackCentered].bodyPart[x])
-                if (checkFirst) {
-                    checkFirst = false
-                    if (arrIntHottrend != null && y >= 0 && y < arrIntHottrend!!.size) {
-                        arrInt.add(arrayListOf(arrIntHottrend!![y][0], arrIntHottrend!![y][1]))
-                    } else {
-                        arrInt.add(arrayListOf(1, 0))
-                    }
+            if (icon.isEmpty()) return@forEachIndexed
+            val bodyPart = currentCat.bodyPart.firstOrNull { it.icon == icon } ?: return@forEachIndexed
+            val localY = yToLocalIndex[
+                entries.firstOrNull { it.icon == icon }?.y ?: return@forEachIndexed
+            ] ?: return@forEachIndexed
+
+            arrShowColor.add(true)
+            listData.add(bodyPart)
+            if (checkFirst) {
+                checkFirst = false
+                if (arrIntHottrend != null && localY >= 0 && localY < arrIntHottrend!!.size) {
+                    arrInt.add(arrayListOf(arrIntHottrend!![localY][0], arrIntHottrend!![localY][1]))
                 } else {
-                    if (arrIntHottrend != null && y >= 0 && y < arrIntHottrend!!.size) {
-                        arrInt.add(arrayListOf(arrIntHottrend!![y][0], arrIntHottrend!![y][1]))
-                    } else {
-                        arrInt.add(arrayListOf(0, 0))
-                    }
+                    arrInt.add(arrayListOf(1, 0))
+                }
+            } else {
+                if (arrIntHottrend != null && localY >= 0 && localY < arrIntHottrend!!.size) {
+                    arrInt.add(arrayListOf(arrIntHottrend!![localY][0], arrIntHottrend!![localY][1]))
+                } else {
+                    arrInt.add(arrayListOf(0, 0))
                 }
             }
+        }
+
+        // Restore saved state
+        val savedState = if (DataHelper.activeCharacter == 1) DataHelper.arrIntChar1
+        else DataHelper.arrIntChar2
+        if (savedState.isNotEmpty() && savedState.size == arrInt.size) {
+            arrInt.clear()
+            arrInt.addAll(savedState.map { arrayListOf(it[0], it[1]) })
+        }
+
+        // Rebuild listImg theo đúng số lượng local
+        repeat(listSize) {
+            listImg.add(AppCompatImageView(applicationContext).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                binding.rl.addView(this)
+            })
         }
     }
 
     var checkRevert = true
     var checkHide = false
     override fun initAction() {
+        binding.btnSwitchCharacter.onSingleClick {
+            // Lưu state nhân vật hiện tại
+            val snapshot = arrInt.map { arrayListOf(it[0], it[1]) } as ArrayList
+            if (DataHelper.activeCharacter == 1) DataHelper.arrIntChar1 = snapshot
+            else DataHelper.arrIntChar2 = snapshot
+
+            // Đổi nhân vật
+            DataHelper.activeCharacter = if (DataHelper.activeCharacter == 1) 2 else 1
+
+            // Reload UI — getData1() đã clear và rebuild listImg + rl rồi
+            getData1()
+
+            adapterNav.posNav = 0
+            adapterNav.submitList(listData)
+            adapterColor.setPos(arrInt[0][1])
+            adapterPart.setPos(arrInt[0][0])
+            submitPartList()
+            updateColorSectionVisibility(0)
+            preloadInitialImages {}
+        }
         adapterColor.onClick = {
             if (!DataHelper.arrBlackCentered[blackCentered].checkDataOnline || isInternetAvailable(
                     applicationContext
@@ -780,7 +851,7 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
                                 arrBlackCentered[blackCentered].avt,
                                 arrBlackCentered[blackCentered].checkDataOnline,
                                 fromList(x),
-                                isFlipped = !checkRevert
+                                isFlipped = !checkRevert,
                             )
                         )
 

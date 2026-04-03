@@ -10,7 +10,8 @@ data class BodyPartModel(
     var icon: String,
     var listPath: ArrayList<ColorModel>,
     var listThumbPath: ArrayList<String> = arrayListOf(),
-    var listSinglePath: ArrayList<String> = arrayListOf()
+    var listSinglePath: ArrayList<String> = arrayListOf(),
+    var charType: Int = 1
 )
 
 data class ColorModel(

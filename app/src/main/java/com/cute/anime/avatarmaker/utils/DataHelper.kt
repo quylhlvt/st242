@@ -103,13 +103,48 @@ object DataHelper {
     var arrBg = arrayListOf<String>()
     var arrBgText = arrayListOf<String>()
     var arrStiker = arrayListOf<String>()
-
+    var activeCharacter = 1
+    var arrIntChar1 = arrayListOf<ArrayList<Int>>()  // state nhân vật 1
+    var arrIntChar2 = arrayListOf<ArrayList<Int>>()
     //lớp view
     var listImageSortView = arrayListOf<String>()
     var assetsLoadProgress = MutableLiveData<LoadingProgress>()
 
     //thứ tự navigation
     var listImage = arrayListOf<String>()
+    // Trả về nav items cho rcvNav theo activeCharacter
+    // DataHelper.kt
+    fun getNavItemsForActiveCharacter(): ArrayList<CustomModel> {
+        val result = arrayListOf<CustomModel>()
+
+        for (catModel in arrBlackCentered) {
+            val filteredCat = CustomModel(catModel.avt, arrayListOf(), catModel.checkDataOnline)
+
+            fun getY(bodyPart: BodyPartModel): Int {
+                val folder = bodyPart.icon
+                    .substringBeforeLast("/").substringAfterLast("/")
+                return folder.split("-").getOrNull(1)?.toIntOrNull() ?: Int.MAX_VALUE
+            }
+
+            // Group theo y-position
+            val groupedByY = catModel.bodyPart.groupBy { getY(it) }
+
+            // Với mỗi y-position, ưu tiên lấy activeCharacter,
+            // nếu không có thì fallback về charType=1
+            for ((_, partsAtY) in groupedByY.entries.sortedBy { it.key }) {
+                val activePart = partsAtY.firstOrNull { it.charType == activeCharacter }
+                val fallbackPart = partsAtY.firstOrNull { it.charType == 1 }
+                val chosen = activePart ?: fallbackPart
+                if (chosen != null) {
+                    filteredCat.bodyPart.add(chosen)
+                }
+            }
+
+            if (filteredCat.bodyPart.isNotEmpty()) result.add(filteredCat)
+        }
+
+        return result
+    }
 
     suspend fun Context.getData(apiRepository: ApiRepository) = coroutineScope {
         val job1 = async(Dispatchers.IO) {
@@ -135,26 +170,39 @@ object DataHelper {
                         catModel.avt = DataHelper.ASSET + "data/$mData/$bodypart"
                     } else {
                         var icon = DataHelper.ASSET + subBodyPart.find { it.contains("nav.") }
-                        val (x, y) = bodypart.split("-").map { it.toInt() }
-                        var mbodyPathModel = BodyPartModel(icon, arrayListOf())
+                        val parts = bodypart.split("-")
+                        val x = parts.getOrNull(0)?.toIntOrNull() ?: 0
+                        val y = parts.getOrNull(1)?.toIntOrNull() ?: 0
+                        val charType = parts.getOrNull(2)?.toIntOrNull() ?: 1
+                        var mbodyPathModel = BodyPartModel(icon, arrayListOf(), charType = charType)
 
                         subBodyPart.forEach { mSubBodyPart ->
                             if (!mSubBodyPart.contains("nav.")) {
-                                val itemColor = assetManager.list("$mSubBodyPart")?.map { "$mSubBodyPart/$it" }
+                                val itemColor = assetManager.list("$mSubBodyPart")
+                                    ?.map { "$mSubBodyPart/$it" }
                                 if (itemColor == null || itemColor.isEmpty()) {
                                     val fileName = mSubBodyPart.substringAfterLast("/")
                                     if (fileName.startsWith("thumb_")) {
                                         mbodyPathModel.listThumbPath.add("${DataHelper.ASSET}$mSubBodyPart")
                                     } else {
+                                        // This is a color folder (e.g. "FFFFFF") — check if it has images
+                                        // This branch is for flat single images, color folders go to listPath below
                                         mbodyPathModel.listSinglePath.add("${DataHelper.ASSET}$mSubBodyPart")
                                     }
                                 } else {
-                                    mbodyPathModel.listPath.add(
-                                        ColorModel(
-                                            mSubBodyPart.substringAfterLast("/"),
-                                            itemColor.map { "${DataHelper.ASSET}$it" } as ArrayList<String>
+                                    // itemColor is non-empty → this is a color subfolder
+                                    val fileName = mSubBodyPart.substringAfterLast("/")
+                                    if (fileName.startsWith("thumb_")) {
+                                        // thumb_ folder — shouldn't happen, but guard anyway
+                                        mbodyPathModel.listThumbPath.add("${DataHelper.ASSET}$mSubBodyPart")
+                                    } else {
+                                        mbodyPathModel.listPath.add(
+                                            ColorModel(
+                                                fileName,
+                                                itemColor.map { "${DataHelper.ASSET}$it" } as ArrayList<String>
+                                            )
                                         )
-                                    )
+                                    }
                                 }
                             }
                         }
@@ -179,29 +227,43 @@ object DataHelper {
                         catModel.bodyPart.add(mbodyPathModel)
                     }
                 }
-                catModel.bodyPart.forEach {
+                // ✅ THAY BẰNG đoạn này:
+// Tìm minY của từng charType để xác định nav đầu tiên
+                val minYPerCharType = catModel.bodyPart
+                    .groupBy { it.charType }
+                    .mapValues { (_, parts) ->
+                        parts.mapNotNull { bp ->
+                            bp.icon.substringBeforeLast("/").substringAfterLast("/")
+                                .split("-").getOrNull(1)?.toIntOrNull()
+                        }.minOrNull() ?: Int.MAX_VALUE
+                    }
+
+                catModel.bodyPart.forEach { bodyPart ->
                     try {
-                        if (it.icon.substringBeforeLast("/").substringAfterLast("/")
-                                .substringAfter("-")
-                                .toInt() == 1
-                        ) {
-                            it.listPath.forEach {
-                                if (it.listPath[0] != "dice") {
-                                    it.listPath.add(0, "dice")
+                        val folderY = bodyPart.icon
+                            .substringBeforeLast("/").substringAfterLast("/")
+                            .split("-").getOrNull(1)?.toIntOrNull() ?: Int.MAX_VALUE
+
+                        val minYForThisChar = minYPerCharType[bodyPart.charType] ?: Int.MAX_VALUE
+                        val isFirstNav = (folderY == minYForThisChar)
+
+                        bodyPart.listPath.forEach { colorModel ->
+                            if (isFirstNav) {
+                                // Nav đầu tiên của mỗi charType: chỉ dice
+                                if (colorModel.listPath.firstOrNull() != "dice") {
+                                    colorModel.listPath.add(0, "dice")
                                 }
-                            }
-                        } else {
-                            it.listPath.forEach {
-                                if (it.listPath[0] != "none") {
-                                    it.listPath.add(0, "none")
-                                    it.listPath.add(1, "dice")
+                            } else {
+                                // Nav còn lại: none + dice
+                                if (colorModel.listPath.firstOrNull() != "none") {
+                                    colorModel.listPath.add(0, "none")
+                                    colorModel.listPath.add(1, "dice")
                                 }
                             }
                         }
                     } catch (e: Exception) {
-                        Log.d(DataHelper.TAG, "getData: $it")
+                        Log.d(TAG, "getData prepend error: $e")
                     }
-
                 }
                 DataHelper.arrBlackCentered.add(catModel)
             }
@@ -217,7 +279,9 @@ object DataHelper {
         }
         awaitAll(job1, job2, job3, job4)
             DataHelper.callApi(apiRepository)
+
     }
+
     //    var arrDataOnline = MutableLiveData<CharacterResponse>()
     var arrDataOnline = MutableLiveData<DataResponse<CharacterResponse?>>()
     fun callApi(apiRepository: ApiRepository) {
