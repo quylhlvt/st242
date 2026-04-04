@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Cute Anime: Avatar Maker</string>
     <string name="this_action_may_contain_advertising">This action can contain ads</string>
-    <string name="language">Language</string>
+    <string name="language">\u00A0Language</string>
     <string name="next">Next</string>
     <string name="next1">Next</string>
     <string name="permission">Permission</string>
@@ -14,7 +14,7 @@
     <string name="one_start">I will cry all day</string>
     <string name="four_start">The prince is so handsome</string>
     <string name="zero_star">I need your love</string>
-    <string name="rate_us">Rate Us</string>
+    <string name="rate_us">\u00A0Rate Us</string>
     <string name="rate">Rate</string>
     <string name="exit">Exit</string>
     <string name="rate_us_0">You have not rated it yet!</string>
@@ -50,8 +50,8 @@
     <string name="do_you_want_to_delete">Do you want to delete?</string>
     <string name="do_you_want_to_reset">Do you want to reset?</string>
     <string name="setting">Settings</string>
-    <string name="share_app">Share App</string>
-    <string name="privacy_policy"><![CDATA[Privacy & Policy]]></string>
+    <string name="share_app">\u0020Share App</string>
+    <string name="privacy_policy">\u0020<![CDATA[Privacy & Policy]]></string>
     <string name="the_layer_have_only_one_item">The layer have only one item</string>
     <string name="intro1">Create Your Dream Couple</string>
     <string name="intro2">Mix &amp; Match Cute Outfits</string>

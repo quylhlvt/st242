@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:fontFamily="@font/janda_manatee_solid"
+                    android:fontFamily="@font/fredoka_one_regular"
                     android:text="@{languageModel.name}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

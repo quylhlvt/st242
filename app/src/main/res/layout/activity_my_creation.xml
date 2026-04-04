@@ -27,7 +27,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/janda_manatee_solid"
+            android:fontFamily="@font/fredoka_one_regular"
             android:text="@string/my_creation"
             android:textColor="@color/app_color"
             android:textSize="24sp"

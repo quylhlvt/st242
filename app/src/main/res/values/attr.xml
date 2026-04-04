@@ -54,7 +54,7 @@
     </declare-styleable>
 
     <!-- ==================== OUTER STROKE TEXT VIEW ==================== -->
-    <declare-styleable name="OuterStrokeTextView">
+    <declare-styleable name="OuterStrokeTextView" >
         <attr name="outerStrokeColor" />
         <attr name="outerStrokeWidth" />
         <attr name="outerStrokeJoinStyle" />

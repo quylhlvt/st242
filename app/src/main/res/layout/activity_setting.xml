@@ -38,8 +38,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/imvBack"
-            android:fontFamily="@font/janda_manatee_solid"
-            android:textColor="@color/app_color"
+            android:fontFamily="@font/fredoka_one_regular"
+            android:textColor="@color/app_color2"
             android:textSize="24sp"
             style="@style/single_marquee"
             />
@@ -60,13 +60,15 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_lang_set" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
-                android:textColor="@color/app_color"
+                android:fontFamily="@font/fredoka_one_regular"
+                android:textColor="@color/colorWhite"
+                app:outerStrokeColor="@color/app_color2"
+                app:outerStrokeWidth="1dp"
+                style="@style/single_marquee"
                 android:text="@string/language"
                 android:textSize="16sp" />
 
@@ -88,14 +90,16 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_reate_set" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
-                android:textColor="@color/app_color"
+                android:fontFamily="@font/fredoka_one_regular"
                 android:text="@string/rate_us"
+                android:textColor="@color/colorWhite"
+                app:outerStrokeColor="@color/app_color2"
+                app:outerStrokeWidth="1dp"
+                style="@style/single_marquee"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -116,13 +120,15 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_share_set" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
-                android:textColor="@color/app_color"
+                android:fontFamily="@font/fredoka_one_regular"
+                android:textColor="@color/colorWhite"
+                app:outerStrokeColor="@color/app_color2"
+                app:outerStrokeWidth="1dp"
+                style="@style/single_marquee"
                 android:text="@string/share_app"
                 android:textSize="16sp" />
 
@@ -144,13 +150,15 @@
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_policy_set" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
+            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
-                android:textColor="@color/app_color"
+                android:fontFamily="@font/fredoka_one_regular"
+                android:textColor="@color/colorWhite"
+                app:outerStrokeColor="@color/app_color2"
+                app:outerStrokeWidth="1dp"
+                style="@style/single_marquee"
                 android:text="@string/privacy_policy"
                 android:textSize="16sp" />
 
