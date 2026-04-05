@@ -52,7 +52,7 @@
                     android:id="@+id/txtNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/janda_manatee_solid"
+                    android:fontFamily="@font/fredoka_one_regular"
                     android:gravity="center"
                     android:paddingVertical="6dp"
                     android:text="@string/next1"

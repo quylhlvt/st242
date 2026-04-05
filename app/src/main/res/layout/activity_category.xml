@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/imvBack"
-            android:fontFamily="@font/janda_manatee_solid"
+            android:fontFamily="@font/fredoka_one_regular"
             android:textColor="@color/app_color"
             android:textSize="24sp"
             app:outerStrokeColor="@color/app_color2"
