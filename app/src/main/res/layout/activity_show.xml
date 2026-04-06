@@ -32,6 +32,45 @@
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_bg_timmer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/bg_timer"
+            app:layout_constraintDimensionRatio="0.6:0.38"
+            app:layout_constraintTop_toTopOf="@+id/imvBack"
+            app:layout_constraintStart_toEndOf="@+id/imvBack"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="110dp"/>
+            <ImageView
+            android:id="@+id/img_bg_timmer1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/bg_timer1"
+            app:layout_constraintDimensionRatio="0.37:0.17"
+            app:layout_constraintTop_toTopOf="@+id/img_bg_timmer"
+                app:layout_constraintBottom_toBottomOf="@+id/img_bg_timmer"
+                app:layout_constraintStart_toStartOf="@+id/img_bg_timmer"
+                app:layout_constraintEnd_toEndOf="@+id/img_bg_timmer"
+                android:layout_marginStart="11dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginVertical="15dp"
+           />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/app_color2"
+            android:text="05:00"
+            android:gravity="center"
+            android:fontFamily="@font/digital_numbers_regular"
+            android:textSize="11sp"
+            app:layout_constraintTop_toTopOf="@+id/img_bg_timmer1"
+            app:layout_constraintBottom_toBottomOf="@+id/img_bg_timmer1"
+            app:layout_constraintStart_toStartOf="@+id/img_bg_timmer1"
+            app:layout_constraintEnd_toEndOf="@+id/img_bg_timmer1"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnSave"
             android:layout_width="32dp"
