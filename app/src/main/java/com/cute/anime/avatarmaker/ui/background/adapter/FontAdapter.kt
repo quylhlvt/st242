@@ -33,7 +33,7 @@ class FontAdapter :
             } else {
                 material.cardElevation=  0f
 //            binding.tv.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
-                material.setCardBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.app_color3))
+                material.setCardBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.app_color5))
             }
         }
     }

@@ -563,8 +563,12 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun addDrawImmediately(draw: DrawableDraw, position: Int) {
         setDrawPosition(draw, position)
 
-        val widthScaleFactor =  width.toFloat() / draw.drawable.intrinsicWidth *0.7f
-        val heightScaleFactor = height.toFloat() / draw.drawable.intrinsicHeight*0.7f
+        val insetPx = dpToPx(-5) * 2  // 2dp mỗi bên, nhân 2 cho cả 2 phía
+        val availableW = (width.toFloat() - insetPx) * 0.7f
+        val availableH = (height.toFloat() - insetPx) * 0.7f
+
+        val widthScaleFactor = availableW / draw.drawable.intrinsicWidth
+        val heightScaleFactor = availableH / draw.drawable.intrinsicHeight
         val scaleFactor = if (widthScaleFactor > heightScaleFactor) heightScaleFactor else widthScaleFactor
 
         if (draw.isText) {
@@ -575,14 +579,10 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             draw.getMatrix().postScale(scaleFactor / 2f, scaleFactor / 2f, width / 2f, height / 2f)
         }
 
-
         initialScaleMap[draw] = draw.currentScale
         handlingDraw = draw
         drawList.add(draw)
-
-        // save undo khi add xong
         saveDrawState()
-
         OnDrawListener?.onAddedDraw(draw)
         invalidate()
     }
@@ -682,9 +682,10 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
                     val drawW = handlingDraw!!.width
                     val drawH = handlingDraw!!.height
                     if (drawW > 0 && drawH > 0) {
+                        val insetPx = dpToPx(-5).toInt() // thụt vào 2dp
                         canvas.save()
                         canvas.concat(handlingDraw!!.getMatrix())
-                        drawable.setBounds(0, 0, drawW, drawH)
+                        drawable.setBounds(insetPx, insetPx, drawW - insetPx, drawH - insetPx)
                         drawable.draw(canvas)
                         canvas.restore()
                     }
@@ -702,7 +703,7 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
                         DrawKey.LEFT_BOTTOM -> setupMatrix(icon, x3, y3, rotation)
                         DrawKey.RIGHT_BOTTOM -> setupMatrix(icon, x4, y4, rotation)
                     }
-                    if (icon.positionDefault == DrawKey.LEFT_BOTTOM) {
+                    if (icon.positionDefault == DrawKey.RIGHT_BOTTOM) {
                         if (handlingDraw!!.isText) {
 
                         }
@@ -971,7 +972,7 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         )
         deleteIcon.event = DeleteEvent()
         val zoomIcon = BitmapDrawIcon(
-            ContextCompat.getDrawable(context, R.drawable.ic_rotation), DrawKey.RIGHT_BOTTOM
+            ContextCompat.getDrawable(context, R.drawable.ic_rotation), DrawKey.LEFT_BOTTOM
         )
         zoomIcon.event = ZoomEvent()
         val flipIcon = BitmapDrawIcon(
@@ -979,7 +980,7 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         )
         flipIcon.event = FlipEvent()
         val editIcon = BitmapDrawIcon(
-            ContextCompat.getDrawable(context, R.drawable.ic_close_1), DrawKey.LEFT_BOTTOM
+            ContextCompat.getDrawable(context, R.drawable.ic_close_1), DrawKey.RIGHT_BOTTOM
         )
         editIcon.event = EditEvent()
         iconList.clear()

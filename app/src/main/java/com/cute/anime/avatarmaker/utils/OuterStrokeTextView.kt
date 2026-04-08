@@ -8,7 +8,7 @@ import android.graphics.Paint.Join
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.cute.anime.avatarmaker.R
-import ir.kotlin.kavehcolorpicker.dp
+import ir.kotlin.quyhcolorpicker.dp
 
 class OuterStrokeTextView : AppCompatTextView {
 
@@ -79,9 +79,9 @@ class OuterStrokeTextView : AppCompatTextView {
         if (extraPadding > 0) {
             setPadding(
                 paddingLeft + extraPadding,
-                paddingTop + extraPadding,
+                paddingTop + dp(5).toInt(),
                 paddingRight + extraPadding,
-                paddingBottom + extraPadding
+                paddingBottom +  dp(5).toInt()
             )
             extraPadding = 0
         }

@@ -31,7 +31,7 @@
                 android:layout_margin="4dp"
                 app:strokeWidth="0dp"
                 app:strokeColor="@color/gray_stroker_custom"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="0dp">
 
                 <!--            imvImage-->
@@ -84,7 +84,7 @@
                 app:cardBackgroundColor="@color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="20dp"
                 android:layout_margin="4dp" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

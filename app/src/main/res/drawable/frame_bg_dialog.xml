@@ -7,7 +7,7 @@
 
     <!-- Card background fill -->
     <path
-        android:fillColor="#FFE4E1"
+        android:fillColor="#FFFFFF"
         android:pathData="M3.57 32.12c0-16.29 13.21-29.5 29.5-29.5h268c16.29 0 29.5 13.21 29.5 29.5v300c0 16.29-13.21 29.5-29.5 29.5h-268c-16.29 0-29.5-13.21-29.5-29.5z"/>
     <!-- Card border stroke -->
     <path

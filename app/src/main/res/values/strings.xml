@@ -120,5 +120,6 @@
     <string name="tvCosplay7">percentage score (%).</string>
     <string name="tvCosplay8">The closer your character looks to the random image, the higher your final score will be. Pay attention to small details to achieve the best cosplay result.</string>
     <string name="unstable_connection_please_check_your_network_connection">Unstable connection, please check your network connection</string>
+    <string name="try_again">Try again</string>
 
 </resources>

@@ -31,7 +31,6 @@
         android:layout_marginEnd="16dp"
         android:src="@drawable/imv_tick"
         android:layout_marginTop="8dp"
-        app:tint="@color/app_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <ScrollView
@@ -40,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="-12dp"
         app:layout_constraintTop_toBottomOf="@+id/imvTick">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,10 +53,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
+                android:fontFamily="@font/fredoka_one_regular"
                 android:text="@string/text"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/app_color2"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,9 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/janda_manatee_solid"
+                android:fontFamily="@font/fredoka_one_regular"
                 android:text="@string/font"
-                android:textColor="@color/white"
+                android:textColor="@color/app_color2"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edt" />
@@ -115,9 +114,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="13dp"
-                android:fontFamily="@font/janda_manatee_solid"
+                android:fontFamily="@font/fredoka_one_regular"
                 android:text="@string/color2"
-                android:textColor="@color/white"
+                android:textColor="@color/app_color2"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rcvFont" />

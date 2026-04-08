@@ -204,9 +204,9 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityMyCreationBinding>() 
 
                     "longclick" -> {
                         this@MyCreationActivity.binding.rcvAvatar.setMargins(
-                            15.dp(this@MyCreationActivity),
-                            16.dp(this@MyCreationActivity),
-                            15.dp(this@MyCreationActivity),
+                            8.dp(this@MyCreationActivity),
+                            10.dp(this@MyCreationActivity),
+                            8.dp(this@MyCreationActivity),
                             50
                         )
                         checkLongClick = true
@@ -282,9 +282,9 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityMyCreationBinding>() 
 
                     "longclick" -> {
                         this@MyCreationActivity.binding.rcvDesign.setMargins(
-                            15.dp(this@MyCreationActivity),
-                            16.dp(this@MyCreationActivity),
-                            15.dp(this@MyCreationActivity),
+                            8.dp(this@MyCreationActivity),
+                            10.dp(this@MyCreationActivity),
+                            8.dp(this@MyCreationActivity),
                             50
                         )
                         checkLongClick = true
@@ -464,15 +464,15 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityMyCreationBinding>() 
     var checkLongClick = false
     fun hideLongClick() {
         this@MyCreationActivity.binding.rcvAvatar.setMargins(
-            15.dp(this@MyCreationActivity),
-            16.dp(this@MyCreationActivity),
-            15.dp(this@MyCreationActivity),
+            8.dp(this@MyCreationActivity),
+            10.dp(this@MyCreationActivity),
+            8.dp(this@MyCreationActivity),
             0
         )
         this@MyCreationActivity.binding.rcvDesign.setMargins(
-            15.dp(this@MyCreationActivity),
-            16.dp(this@MyCreationActivity),
-            15.dp(this@MyCreationActivity),
+            8.dp(this@MyCreationActivity),
+            10.dp(this@MyCreationActivity),
+            8.dp(this@MyCreationActivity),
             0
         )
         checkLongClick = false

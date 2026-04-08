@@ -188,13 +188,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:cardBackgroundColor="@color/app_color3"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/app_color4"
+                app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/app_color"
-                app:strokeWidth="1dp">
+                app:strokeColor="@color/app_color2"
+                app:strokeWidth="1.6dp">
 
 
                 <RelativeLayout
@@ -238,13 +238,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:cardBackgroundColor="@color/app_color3"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/app_color4"
+                app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/app_color"
-                app:strokeWidth="1dp">
+                app:strokeColor="@color/app_color2"
+                app:strokeWidth="1.6dp">
 
 
                 <RelativeLayout
@@ -332,7 +332,7 @@
         <FrameLayout
             android:id="@+id/llNav"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="54dp"
             android:background="@drawable/bg_nav_custom"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -364,7 +364,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#3D000000"
-            android:elevation="5dp"
+            android:elevation="7dp"
             android:gravity="center"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -376,42 +376,6 @@
                 android:background="#80545454"
                 android:gravity="center">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/titleFame"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="84dp"
-                    android:layout_marginBottom="-45dp"
-                    android:textAllCaps="true"
-                    app:cardBackgroundColor="@color/transparent"
-                    app:cardElevation="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-                    app:layout_constraintDimensionRatio="1.6:0.68"
-                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                    app:strokeWidth="0dp">
-
-                    <FrameLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_title_dialog_loading">
-
-                        <TextView
-                            android:id="@+id/txtTitle"
-                            style="@style/single_marquee"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginHorizontal="13dp"
-                            android:fontFamily="@font/janda_manatee_solid"
-                            android:gravity="center"
-                            android:text="@string/loading"
-
-                            android:textColor="@color/app_color"
-                            android:textSize="20sp"
-                            app:strokeJoinStyle="miter" />
-                    </FrameLayout>
-                </com.google.android.material.card.MaterialCardView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -440,16 +404,33 @@
                         <!--                            android:layout_marginVertical="12dp"-->
                         <!--                            android:id="@+id/imgInLoading"-->
                         <!--                            android:src="@drawable/img_in_loading"/>-->
-
+                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                            android:id="@+id/txtTitle"
+                            style="@style/single_marquee"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="24dp"
+                            android:fontFamily="@font/fredoka_one_regular"
+                            android:gravity="center"
+                            android:text="@string/loading"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            app:outerStrokeWidth="1dp"
+                            app:outerStrokeColor="@color/app_color2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:strokeJoinStyle="miter" />
                         <TextView
                             android:id="@+id/txtContent"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
-                            android:fontFamily="@font/janda_manatee_solid"
+                            android:fontFamily="@font/fredoka_one_regular"
                             android:gravity="center"
                             android:text="@string/wait_a_few_second"
-                            android:textColor="@color/app_color"
+                            android:textColor="@color/app_color2"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

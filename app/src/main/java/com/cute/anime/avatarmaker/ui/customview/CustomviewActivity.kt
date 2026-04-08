@@ -74,38 +74,7 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_customize
 
-    // ─── SWITCH ───────────────────────────────────────────────────────────────
-    private fun switchToChar(char: Int) {
-        editingChar = char
-        val isChar1 = char == 1
 
-        binding.rcvNav.visibility = if (isChar1) View.VISIBLE else View.GONE
-        binding.rcvNav2.visibility = if (isChar1) View.GONE else View.VISIBLE
-        binding.rcvPart.visibility = if (isChar1) View.VISIBLE else View.GONE
-        binding.rcvPart2.visibility = if (isChar1) View.GONE else View.VISIBLE
-
-        if (isChar1) {
-            binding.rcvColor.visibility = View.VISIBLE
-            binding.relativeLayout2.visibility = View.GONE
-            binding.relativeLayout.visibility = View.VISIBLE
-            adapterNav.submitList(listData)
-            adapterColor.setPos(arrInt[adapterNav.posNav][1])
-            adapterColor.submitList(listData[adapterNav.posNav].listPath)
-            adapterPart.setPos(arrInt[adapterNav.posNav][0])
-            submitPartList()
-            updateColorSectionVisibility(adapterNav.posNav)
-        } else {
-            binding.rcvColor.visibility = View.GONE
-            binding.relativeLayout.visibility = View.GONE
-            binding.llColor.visibility = View.VISIBLE
-            binding.llColor.alpha = 1f
-            adapterNav2.submitList(listData2)
-            adapterColor2.setPos(arrInt2[adapterNav2.posNav][1])
-            adapterPart2.setPos(arrInt2[adapterNav2.posNav][0])
-            submitPartList2()
-            updateColorVisibility2(adapterNav2.posNav)
-        }
-    }
 
     // ─── INIT ─────────────────────────────────────────────────────────────────
     override fun onRestart() {
@@ -532,43 +501,43 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
                 if (editingChar == 1) {
                     val navPos = adapterNav.posNav
                     if ((listData.getOrNull(navPos)?.listPath?.size ?: 0) <= 1) return@onSingleClick
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = true
-                    if (llColor.visibility == View.VISIBLE && llColor.alpha == 1f
-                        && relativeLayout.visibility == View.VISIBLE
-                    ) return@onSingleClick
-                    relativeLayout.visibility = View.VISIBLE
-                    llColor.visibility = View.VISIBLE
-                    llColor.alpha = 0f
-                    llColor.animate().alpha(1f).setDuration(200).start()
+                    if (arrShowColor[navPos] && binding.llColor.visibility == View.VISIBLE) return@onSingleClick
+                    arrShowColor[navPos] = true
+                    binding.relativeLayout2.visibility = View.GONE
+                    binding.relativeLayout.visibility = View.VISIBLE
+                    binding.relativeLayout.alpha = 0f
+                    binding.llColor.visibility = View.VISIBLE
+                    binding.llColor.alpha = 0f
+                    binding.llColor.animate().alpha(1f).setDuration(200).start()
+                    binding.relativeLayout.animate().alpha(1f).setDuration(200).start()
                 } else {
-                    // ✅ char 2: show lại relativeLayout2
                     val navPos = adapterNav2.posNav
-                    if ((listData2.getOrNull(navPos)?.listPath?.size
-                            ?: 0) <= 1
-                    ) return@onSingleClick
-                    if (navPos < arrShowColor2.size) arrShowColor2[navPos] = true
-                    if (relativeLayout2.visibility == View.VISIBLE && relativeLayout2.alpha == 1f) return@onSingleClick
-                    relativeLayout2.visibility = View.VISIBLE
-                    relativeLayout2.alpha = 0f
-                    relativeLayout2.animate().alpha(1f).setDuration(200).start()
+                    if ((listData2.getOrNull(navPos)?.listPath?.size ?: 0) <= 1) return@onSingleClick
+                    if (arrShowColor2[navPos] && binding.llColor.visibility == View.VISIBLE) return@onSingleClick
+                    arrShowColor2[navPos] = true
+                    binding.relativeLayout.visibility = View.GONE
+                    binding.relativeLayout2.visibility = View.VISIBLE
+                    binding.relativeLayout2.alpha = 0f
+                    binding.llColor.visibility = View.VISIBLE
+                    binding.llColor.alpha = 0f
+                    binding.llColor.animate().alpha(1f).setDuration(200).start()
+                    binding.relativeLayout2.animate().alpha(1f).setDuration(200).start()
                     adapterColor2.submitList(listData2[navPos].listPath)
                 }
             }
+
             imvEndColor.onSingleClick {
                 val navPos = adapterNav.posNav
                 if (navPos < arrShowColor.size) arrShowColor[navPos] = false
-                llColor.animate().alpha(0f).setDuration(200).withEndAction {
-                    llColor.visibility = View.INVISIBLE  // ✅ INVISIBLE thay vì GONE để giữ layout
-                }.start()
+                binding.llColor.animate().alpha(0f).setDuration(200)
+                    .withEndAction { binding.llColor.visibility = View.GONE }.start()
             }
 
-            // ── char 2 ──  ✅ thêm mới
             imvEndColor2.onSingleClick {
                 val navPos = adapterNav2.posNav
                 if (navPos < arrShowColor2.size) arrShowColor2[navPos] = false
-                relativeLayout2.animate().alpha(0f).setDuration(200).withEndAction {
-                    relativeLayout2.visibility = View.INVISIBLE
-                }.start()
+                binding.llColor.animate().alpha(0f).setDuration(200)
+                    .withEndAction { binding.llColor.visibility = View.GONE }.start()
             }
 
             btnReset.onSingleClick {
@@ -754,49 +723,94 @@ class CustomviewActivity : AbsBaseActivity<ActivityCustomizeBinding>() {
         }
     }
 
+    private fun switchToChar(char: Int) {
+        editingChar = char
+        val isChar1 = char == 1
+        binding.apply {
+            btnSwitchCharacter.setImageResource(
+                if (isChar1) R.drawable.ic_switch_character_male
+                else R.drawable.ic_switch_character_female
+            )
+            rcvNav.visibility   = if (isChar1) View.VISIBLE else View.GONE
+            rcvNav2.visibility  = if (isChar1) View.GONE    else View.VISIBLE
+            rcvPart.visibility  = if (isChar1) View.VISIBLE else View.GONE
+            rcvPart2.visibility = if (isChar1) View.GONE    else View.VISIBLE
+
+            if (isChar1) {
+                adapterNav.submitList(listData)
+                adapterColor.setPos(arrInt[adapterNav.posNav][1])
+                adapterColor.submitList(listData[adapterNav.posNav].listPath)
+                adapterPart.setPos(arrInt[adapterNav.posNav][0])
+                submitPartList()
+                updateColorSectionVisibility(adapterNav.posNav)
+            } else {
+                adapterNav2.submitList(listData2)
+                adapterColor2.setPos(arrInt2[adapterNav2.posNav][1])
+                adapterColor2.submitList(listData2[adapterNav2.posNav].listPath)
+                adapterPart2.setPos(arrInt2[adapterNav2.posNav][0])
+                submitPartList2()
+                updateColorVisibility2(adapterNav2.posNav)
+            }
+        }
+    }
+
     private fun updateColorSectionVisibility(posNav: Int = adapterNav.posNav) {
         if (posNav < 0 || posNav >= listData.size) return
         val hasMultipleColors = listData[posNav].listPath.size > 1
+
+        // Luôn ẩn char2 khi đang ở char1
+        binding.relativeLayout2.visibility = View.GONE
+
         if (!hasMultipleColors) {
-            binding.imvShowColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.imvShowColor.visibility = View.INVISIBLE }
-            binding.llColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.llColor.visibility = View.GONE }
+            // Nav không có màu → ẩn toàn bộ color row, reset flag
+            binding.imvShowColor.visibility = View.INVISIBLE
+            binding.llColor.visibility = View.GONE
+            if (posNav < arrShowColor.size) arrShowColor[posNav] = true
             return
         }
-        binding.imvShowColor.animate().alpha(1f).setDuration(150)
-            .withStartAction { binding.imvShowColor.visibility = View.VISIBLE }
-        if (arrShowColor[posNav])
-            binding.llColor.animate().alpha(1f).setDuration(150)
-                .withStartAction { binding.llColor.visibility = View.VISIBLE }
-        else
-            binding.llColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.llColor.visibility = View.GONE }
+
+        // Nav có màu → show imvShowColor + relativeLayout
+        binding.imvShowColor.visibility = View.VISIBLE
+        binding.imvShowColor.alpha = 1f
+
+        if (arrShowColor[posNav]) {
+            binding.llColor.visibility = View.VISIBLE
+            binding.llColor.alpha = 1f
+            binding.relativeLayout.visibility = View.VISIBLE
+            binding.relativeLayout.alpha = 1f
+        } else {
+            // User đã đóng → ẩn llColor nhưng giữ flag
+            binding.llColor.visibility = View.GONE
+            binding.relativeLayout.visibility = View.GONE
+        }
     }
 
     private fun updateColorVisibility2(posNav: Int) {
         if (posNav < 0 || posNav >= listData2.size) return
         val hasMultipleColors = listData2[posNav].listPath.size > 1
 
+        // Luôn ẩn char1 khi đang ở char2
         binding.relativeLayout.visibility = View.GONE
 
         if (!hasMultipleColors) {
             binding.imvShowColor.visibility = View.INVISIBLE
-            binding.llColor.visibility = View.INVISIBLE
-            binding.relativeLayout2.visibility = View.GONE
-        } else {
-            binding.imvShowColor.visibility = View.VISIBLE
-            binding.imvShowColor.alpha = 1f
+            binding.llColor.visibility = View.GONE
+            if (posNav < arrShowColor2.size) arrShowColor2[posNav] = true
+            return
+        }
+
+        binding.imvShowColor.visibility = View.VISIBLE
+        binding.imvShowColor.alpha = 1f
+
+        if (arrShowColor2[posNav]) {
             binding.llColor.visibility = View.VISIBLE
             binding.llColor.alpha = 1f
-            // ✅ Dùng arrShowColor2 để nhớ trạng thái đóng/mở
-            if (arrShowColor2[posNav]) {
-                binding.relativeLayout2.visibility = View.VISIBLE
-                binding.relativeLayout2.alpha = 1f
-                adapterColor2.submitList(listData2[posNav].listPath)
-            } else {
-                binding.relativeLayout2.visibility = View.INVISIBLE
-            }
+            binding.relativeLayout2.visibility = View.VISIBLE
+            binding.relativeLayout2.alpha = 1f
+            adapterColor2.submitList(listData2[posNav].listPath)
+        } else {
+            binding.llColor.visibility = View.GONE
+            binding.relativeLayout2.visibility = View.GONE
         }
     }
 

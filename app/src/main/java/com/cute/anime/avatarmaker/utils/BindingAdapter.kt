@@ -11,7 +11,7 @@ import androidx.core.graphics.toColorInt
 import com.cute.anime.avatarmaker.data.model.LanguageModel
 import com.cute.anime.avatarmaker.R
 import com.google.android.material.card.MaterialCardView
-import ir.kotlin.kavehcolorpicker.dp
+import ir.kotlin.quyhcolorpicker.dp
 
 @BindingAdapter("setBGCV")
 fun ConstraintLayout.setBGCV(check: LanguageModel) {

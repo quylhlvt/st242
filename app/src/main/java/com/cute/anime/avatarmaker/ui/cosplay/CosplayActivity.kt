@@ -101,14 +101,14 @@ class CosplayActivity : AbsBaseActivity<ActivityCosplayBinding>() {
             btnCosplay.alpha = 0.5f
             btnRandomize.alpha = 0.5f
             txtContentCosplay.text = TextUtils.concat(
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay1), R.color.app_color, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay2), R.color.white, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay3), R.color.app_color, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay4), R.color.white, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay5), R.color.app_color, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay6), R.color.white, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay7), R.color.app_color, R.font.hvd_comic_serif_pro), space,
-                changeText(this@CosplayActivity, getString(R.string.tvCosplay8), R.color.white, R.font.hvd_comic_serif_pro)
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay1), R.color.app_color2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay2), R.color.black2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay3), R.color.app_color2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay4), R.color.black2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay5), R.color.app_color2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay6), R.color.black2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay7), R.color.app_color2, R.font.fredoka_one_regular), space,
+                changeText(this@CosplayActivity, getString(R.string.tvCosplay8), R.color.black2, R.font.fredoka_one_regular)
             )
         }
         randomizeCharacter()

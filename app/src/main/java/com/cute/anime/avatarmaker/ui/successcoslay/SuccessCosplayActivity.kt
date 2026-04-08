@@ -81,11 +81,15 @@ class SuccessCosplayActivity : AbsBaseActivity<ActivitySuccessCosplayBinding>() 
 
         binding.tvTitle.isSelected = true
         binding.imvBack.isSelected = true
+        binding.tv2.isSelected = true
     }
-
+    override fun onBackPressed() {
+    }
     override fun initAction() {
         binding.apply {
-            imvBack.onSingleClick { finish() }
+            btnTryAgain.onSingleClick {
+                setResult(RESULT_OK)
+                finish() }
             imvHome.onSingleClick {
                 startActivity(newIntent(applicationContext, MainActivity::class.java))
                 finish()

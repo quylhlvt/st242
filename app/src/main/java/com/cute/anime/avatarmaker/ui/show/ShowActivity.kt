@@ -87,7 +87,102 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
     private var loadingCount = 0
 
     override fun getLayoutId() = R.layout.activity_show
+    // ── Timer ──────────────────────────────────────────────────────────────────
+    private var countDownTimer: android.os.CountDownTimer? = null
+    companion object {
+        const val REQUEST_COSPLAY = 1001
+    }
+    private var remainingTimeMs = 300_000L
 
+    private fun startCountdown(timeMs: Long = remainingTimeMs) {
+        countDownTimer?.cancel()
+        countDownTimer = object : android.os.CountDownTimer(timeMs, 1_000L) {
+            override fun onTick(millisUntilFinished: Long) {
+                remainingTimeMs = millisUntilFinished
+                val seconds = millisUntilFinished / 1000
+                binding.countdownTimer.text = String.format("%02d:%02d", seconds / 60, seconds % 60)
+            }
+            override fun onFinish() {
+                remainingTimeMs = 0
+                binding.countdownTimer.text = "00:00"
+                if (!canSave) return
+                binding.llLoading.visibility = View.VISIBLE
+                val bmp  = viewToBitmap(binding.rl)
+                val file = java.io.File(cacheDir, "show_preview_${System.currentTimeMillis()}.png")
+                java.io.FileOutputStream(file).use { fos ->
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, fos); fos.flush()
+                }
+                binding.llLoading.visibility = View.GONE
+                startActivityForResult(
+                    Intent(this@ShowActivity, SuccessCosplayActivity::class.java)
+                        .putExtra("cosplayBitmapPath", imgCoslay)
+                        .putExtra("currentBitmapPath", file.absolutePath)
+                        .putExtra("matchPercent", calculateMatchPercent()),
+                    REQUEST_COSPLAY
+                )
+            }
+        }.start()
+    }
+    override fun onPause() {
+        super.onPause()
+        countDownTimer?.cancel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (remainingTimeMs in 1..<300_000L && canSave) {
+            startCountdown(remainingTimeMs)
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_COSPLAY && resultCode == RESULT_OK) {
+            countDownTimer?.cancel()
+            remainingTimeMs = 300_000L
+
+            // ── Reset arrShowColor ──
+            arrShowColor.fill(true)
+            arrShowColor2.fill(true)
+
+            // ── Reset char1 ──
+            listData.forEach { putImage(it.icon, 0, true) }
+            arrInt.forEachIndexed { i, arr ->
+                arr[0] = if (i == 0) 1 else 0; arr[1] = 0
+            }
+
+            // ── Reset char2 ──
+            listData2.forEach { putImage2(it.icon, 0, true) }
+            arrInt2.forEachIndexed { i, arr ->
+                arr[0] = if (i == 0) 1 else 0; arr[1] = 0
+            }
+
+            // ── Reset nav về 0 rồi switch về char1 ──
+            adapterNav.posNav  = 0
+            adapterNav2.posNav = 0
+            switchToChar(1)
+
+            // ── Render lại char1 (tất cả part) ──
+            listData.forEachIndexed { i, bp ->
+                putImage(bp.icon, arrInt[i][0], false, i, arrInt[i][1])
+            }
+
+            // ── Render lại char2 (tất cả part) ──
+            listData2.forEachIndexed { i, bp ->
+                putImage2(bp.icon, arrInt2[i][0], false, i, arrInt2[i][1])
+            }
+
+            updateMatchUI()
+
+            canSave = true
+            binding.btnSave.alpha = 1f
+            startCountdown()
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer?.cancel()
+        countDownTimer = null
+    }
     // ─────────────────────────────────────────────────────────────────────────
     // INIT
     // ─────────────────────────────────────────────────────────────────────────
@@ -143,6 +238,7 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
             binding.llLoading.visibility = View.GONE
             canSave = true; binding.btnSave.alpha = 1f
             binding.root.post { updateMatchUI() }
+            startCountdown()
         }
     }
 
@@ -364,40 +460,7 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // SWITCH CHAR
-    // ─────────────────────────────────────────────────────────────────────────
-    private fun switchToChar(char: Int) {
-        editingChar = char
-        val isChar1 = char == 1
 
-        binding.rcvNav.visibility  = if (isChar1) View.VISIBLE else View.GONE
-        binding.rcvNav2.visibility = if (isChar1) View.GONE else View.VISIBLE
-        binding.rcvPart.visibility  = if (isChar1) View.VISIBLE else View.GONE
-        binding.rcvPart2.visibility = if (isChar1) View.GONE else View.VISIBLE
-
-        if (isChar1) {
-            binding.relativeLayout2.visibility = View.GONE
-            binding.relativeLayout.visibility  = View.VISIBLE
-            binding.rcvColor.visibility = View.VISIBLE
-            adapterNav.submitList(listData)
-            adapterColor.setPos(arrInt[adapterNav.posNav][1])
-            adapterColor.submitList(listData[adapterNav.posNav].listPath)
-            adapterPart.setPos(arrInt[adapterNav.posNav][0])
-            submitPartList()
-            updateColorSectionVisibility(adapterNav.posNav)
-        } else {
-            binding.relativeLayout.visibility  = View.GONE
-            binding.rcvColor.visibility = View.GONE
-            binding.llColor.visibility = View.VISIBLE
-            binding.llColor.alpha = 1f
-            adapterNav2.submitList(listData2)
-            adapterColor2.setPos(arrInt2[adapterNav2.posNav][1])
-            adapterPart2.setPos(arrInt2[adapterNav2.posNav][0])
-            submitPartList2()
-            updateColorVisibility2(adapterNav2.posNav)
-        }
-    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // PUT IMAGE
@@ -582,19 +645,27 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
                 if (editingChar == 1) {
                     val navPos = adapterNav.posNav
                     if ((listData.getOrNull(navPos)?.listPath?.size ?: 0) <= 1) return@onSingleClick
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = true
-                    if (llColor.visibility == View.VISIBLE && llColor.alpha == 1f
-                        && relativeLayout.visibility == View.VISIBLE) return@onSingleClick
-                    relativeLayout.visibility = View.VISIBLE
-                    llColor.visibility = View.VISIBLE; llColor.alpha = 0f
-                    llColor.animate().alpha(1f).setDuration(200).start()
+                    if (arrShowColor[navPos] && binding.llColor.visibility == View.VISIBLE) return@onSingleClick
+                    arrShowColor[navPos] = true
+                    binding.relativeLayout2.visibility = View.GONE
+                    binding.relativeLayout.visibility = View.VISIBLE
+                    binding.relativeLayout.alpha = 0f
+                    binding.llColor.visibility = View.VISIBLE
+                    binding.llColor.alpha = 0f
+                    binding.llColor.animate().alpha(1f).setDuration(200).start()
+                    binding.relativeLayout.animate().alpha(1f).setDuration(200).start()
                 } else {
                     val navPos = adapterNav2.posNav
                     if ((listData2.getOrNull(navPos)?.listPath?.size ?: 0) <= 1) return@onSingleClick
-                    if (navPos < arrShowColor2.size) arrShowColor2[navPos] = true
-                    if (relativeLayout2.visibility == View.VISIBLE && relativeLayout2.alpha == 1f) return@onSingleClick
-                    relativeLayout2.visibility = View.VISIBLE; relativeLayout2.alpha = 0f
-                    relativeLayout2.animate().alpha(1f).setDuration(200).start()
+                    if (arrShowColor2[navPos] && binding.llColor.visibility == View.VISIBLE) return@onSingleClick
+                    arrShowColor2[navPos] = true
+                    binding.relativeLayout.visibility = View.GONE
+                    binding.relativeLayout2.visibility = View.VISIBLE
+                    binding.relativeLayout2.alpha = 0f
+                    binding.llColor.visibility = View.VISIBLE
+                    binding.llColor.alpha = 0f
+                    binding.llColor.animate().alpha(1f).setDuration(200).start()
+                    binding.relativeLayout2.animate().alpha(1f).setDuration(200).start()
                     adapterColor2.submitList(listData2[navPos].listPath)
                 }
             }
@@ -602,15 +673,15 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
             imvEndColor.onSingleClick {
                 val navPos = adapterNav.posNav
                 if (navPos < arrShowColor.size) arrShowColor[navPos] = false
-                llColor.animate().alpha(0f).setDuration(200)
-                    .withEndAction { llColor.visibility = View.INVISIBLE }.start()
+                binding.llColor.animate().alpha(0f).setDuration(200)
+                    .withEndAction { binding.llColor.visibility = View.GONE }.start()
             }
 
             imvEndColor2.onSingleClick {
                 val navPos = adapterNav2.posNav
                 if (navPos < arrShowColor2.size) arrShowColor2[navPos] = false
-                relativeLayout2.animate().alpha(0f).setDuration(200)
-                    .withEndAction { relativeLayout2.visibility = View.INVISIBLE }.start()
+                binding.llColor.animate().alpha(0f).setDuration(200)
+                    .withEndAction { binding.llColor.visibility = View.GONE }.start()
             }
 
             btnReset.onSingleClick {
@@ -681,11 +752,12 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
                     bmp.compress(Bitmap.CompressFormat.PNG, 100, fos); fos.flush()
                 }
                 llLoading.visibility = View.GONE
-                startActivity(
+                startActivityForResult(
                     Intent(this@ShowActivity, SuccessCosplayActivity::class.java)
                         .putExtra("cosplayBitmapPath", imgCoslay)
                         .putExtra("currentBitmapPath", file.absolutePath)
-                        .putExtra("matchPercent", calculateMatchPercent())
+                        .putExtra("matchPercent", calculateMatchPercent()),
+                    REQUEST_COSPLAY
                 )
             }
 
@@ -777,46 +849,98 @@ class ShowActivity : AbsBaseActivity<ActivityShowBinding>() {
             }
         }
     }
+    private fun switchToChar(char: Int) {
+        editingChar = char
+        val isChar1 = char == 1
+        binding.apply {
+            btnSwitchCharacter.setImageResource(
+                if (isChar1) R.drawable.ic_switch_character_male
+                else R.drawable.ic_switch_character_female
+            )
+            rcvNav.visibility   = if (isChar1) View.VISIBLE else View.GONE
+            rcvNav2.visibility  = if (isChar1) View.GONE    else View.VISIBLE
+            rcvPart.visibility  = if (isChar1) View.VISIBLE else View.GONE
+            rcvPart2.visibility = if (isChar1) View.GONE    else View.VISIBLE
+
+            if (isChar1) {
+                adapterNav.submitList(listData)
+                adapterColor.setPos(arrInt[adapterNav.posNav][1])
+                adapterColor.submitList(listData[adapterNav.posNav].listPath)
+                adapterPart.setPos(arrInt[adapterNav.posNav][0])
+                submitPartList()
+                updateColorSectionVisibility(adapterNav.posNav)
+            } else {
+                adapterNav2.submitList(listData2)
+                adapterColor2.setPos(arrInt2[adapterNav2.posNav][1])
+                adapterColor2.submitList(listData2[adapterNav2.posNav].listPath)
+                adapterPart2.setPos(arrInt2[adapterNav2.posNav][0])
+                submitPartList2()
+                updateColorVisibility2(adapterNav2.posNav)
+            }
+        }
+    }
 
     private fun updateColorSectionVisibility(posNav: Int = adapterNav.posNav) {
         if (posNav < 0 || posNav >= listData.size) return
-        val multi = listData[posNav].listPath.size > 1
-        if (!multi) {
-            binding.imvShowColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.imvShowColor.visibility = View.INVISIBLE }
-            binding.llColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.llColor.visibility = View.GONE }
+        val hasMultipleColors = listData[posNav].listPath.size > 1
+
+        // Luôn ẩn char2 khi đang ở char1
+        binding.relativeLayout2.visibility = View.GONE
+
+        if (!hasMultipleColors) {
+            // Nav không có màu → ẩn toàn bộ color row, reset flag
+            binding.imvShowColor.visibility = View.INVISIBLE
+            binding.llColor.visibility = View.GONE
+            if (posNav < arrShowColor.size) arrShowColor[posNav] = true
             return
         }
-        binding.imvShowColor.animate().alpha(1f).setDuration(150)
-            .withStartAction { binding.imvShowColor.visibility = View.VISIBLE }
-        if (arrShowColor[posNav])
-            binding.llColor.animate().alpha(1f).setDuration(150)
-                .withStartAction { binding.llColor.visibility = View.VISIBLE }
-        else
-            binding.llColor.animate().alpha(0f).setDuration(150)
-                .withEndAction { binding.llColor.visibility = View.GONE }
+
+        // Nav có màu → show imvShowColor + relativeLayout
+        binding.imvShowColor.visibility = View.VISIBLE
+        binding.imvShowColor.alpha = 1f
+
+        if (arrShowColor[posNav]) {
+            binding.llColor.visibility = View.VISIBLE
+            binding.llColor.alpha = 1f
+            binding.relativeLayout.visibility = View.VISIBLE
+            binding.relativeLayout.alpha = 1f
+        } else {
+            // User đã đóng → ẩn llColor nhưng giữ flag
+            binding.llColor.visibility = View.GONE
+            binding.relativeLayout.visibility = View.GONE
+        }
     }
 
     private fun updateColorVisibility2(posNav: Int) {
         if (posNav < 0 || posNav >= listData2.size) return
+        val hasMultipleColors = listData2[posNav].listPath.size > 1
+
+        // Luôn ẩn char1 khi đang ở char2
         binding.relativeLayout.visibility = View.GONE
-        val multi = listData2[posNav].listPath.size > 1
-        if (!multi) {
+
+        if (!hasMultipleColors) {
             binding.imvShowColor.visibility = View.INVISIBLE
-            binding.llColor.visibility = View.INVISIBLE
-            binding.relativeLayout2.visibility = View.GONE
+            binding.llColor.visibility = View.GONE
+            if (posNav < arrShowColor2.size) arrShowColor2[posNav] = true
+            return
+        }
+
+        binding.imvShowColor.visibility = View.VISIBLE
+        binding.imvShowColor.alpha = 1f
+
+        if (arrShowColor2[posNav]) {
+            binding.llColor.visibility = View.VISIBLE
+            binding.llColor.alpha = 1f
+            binding.relativeLayout2.visibility = View.VISIBLE
+            binding.relativeLayout2.alpha = 1f
+            adapterColor2.submitList(listData2[posNav].listPath)
         } else {
-            binding.imvShowColor.visibility = View.VISIBLE; binding.imvShowColor.alpha = 1f
-            binding.llColor.visibility = View.VISIBLE; binding.llColor.alpha = 1f
-            if (arrShowColor2[posNav]) {
-                binding.relativeLayout2.visibility = View.VISIBLE; binding.relativeLayout2.alpha = 1f
-                adapterColor2.submitList(listData2[posNav].listPath)
-            } else {
-                binding.relativeLayout2.visibility = View.INVISIBLE
-            }
+            binding.llColor.visibility = View.GONE
+            binding.relativeLayout2.visibility = View.GONE
         }
     }
+
+
 
     // ─────────────────────────────────────────────────────────────────────────
     // MATCH %

@@ -40,17 +40,12 @@
                 android:layout_height="wrap_content">
                 <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="4dp"
                 android:gravity="center"
                 >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    app:layout_constraintDimensionRatio="1.64:0.32"
-                    android:src="@drawable/img_frame_mywork1"/>
+
 
                 <ImageView
                     android:id="@+id/img_image1_1_frame"
@@ -65,12 +60,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
                     android:id="@+id/tv1"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/janda_manatee_solid"
+                    android:fontFamily="@font/fredoka_one_regular"
                     android:gravity="center"
                     android:text="@string/image"
                     android:textColor="@color/white"
@@ -78,16 +73,16 @@
                     style="@style/single_marquee"
                     app:layout_constraintTop_toTopOf="@+id/img_image1_1_frame"
                     app:layout_constraintBottom_toBottomOf="@+id/img_image1_1_frame"
-                    app:outerStrokeColor="@color/app_color"
+                    app:outerStrokeColor="@color/app_color2"
                     app:outerStrokeJoinStyle="miter"
-                    app:outerStrokeWidth="1dp" />
+                    app:outerStrokeWidth="0.4dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/btnColor"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="35dp"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
@@ -95,7 +90,7 @@
                     android:fontFamily="@font/janda_manatee_solid"
                     android:gravity="center"
                     android:text="@string/color"
-                    android:textColor="@color/app_color" />
+                    android:textColor="@color/app_color2" />
 
 
 
@@ -111,7 +106,7 @@
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/btnImage"
           android:layout_width="match_parent"
-          android:layout_height="32dp"
+          android:layout_height="35dp"
           android:layout_marginHorizontal="4dp"
           android:layout_weight="1"
           android:textSize="14sp"
@@ -119,20 +114,15 @@
           android:fontFamily="@font/janda_manatee_solid"
           android:gravity="center"
           android:text="@string/image"
-          android:textColor="@color/app_color" />
+          android:textColor="@color/app_color2" />
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="32dp"
+          android:layout_height="35dp"
           android:layout_weight="1"
           android:layout_marginHorizontal="4dp"
           android:gravity="center"
           >
-          <ImageView
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:scaleType="fitXY"
-              app:layout_constraintDimensionRatio="1.64:0.32"
-              android:src="@drawable/img_frame_mywork1"/>
+
 
           <ImageView
               android:id="@+id/img_color1_1_frame"
@@ -140,19 +130,18 @@
               android:layout_height="match_parent"
               android:adjustViewBounds="true"
               android:scaleType="fitXY"
-              android:layout_marginBottom="2dp"
               app:layout_constraintDimensionRatio="1.64:0.30"
               android:src="@drawable/img_frame_mywork1_1"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent" />
 
-          <TextView
+          <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
               android:id="@+id/tv2"
               android:layout_width="match_parent"
               android:layout_height="0dp"
               android:layout_marginHorizontal="10dp"
-              android:fontFamily="@font/janda_manatee_solid"
+              android:fontFamily="@font/fredoka_one_regular"
               android:gravity="center"
               android:text="@string/color"
               android:textColor="@color/white"
@@ -160,9 +149,9 @@
               style="@style/single_marquee"
               app:layout_constraintTop_toTopOf="@+id/img_color1_1_frame"
               app:layout_constraintBottom_toBottomOf="@+id/img_color1_1_frame"
-              app:outerStrokeColor="@color/app_color"
+              app:outerStrokeColor="@color/app_color2"
               app:outerStrokeJoinStyle="miter"
-              app:outerStrokeWidth="1dp" />
+              app:outerStrokeWidth="0.4dp" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 

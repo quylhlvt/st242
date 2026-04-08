@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="black2">#4D000000</color>
+    <color name="black2">#565656</color>
+    <color name="black3">#3D000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fcedf2">#FCEDF2</color>
     <color name="ff4798">#ff4798</color>
@@ -83,8 +84,8 @@
     <color name="app_color">#D05E8D</color>
     <color name="app_color2">#C13F74</color>
     <color name="app_color3">#ECBDC4</color>
-    <color name="app_color4">#FCC3D4</color>
-    <color name="app_color5">#CBBBEA</color>
+    <color name="app_color4">#FFF4BD</color>
+    <color name="app_color5">#FFD1DC</color>
     <color name="app_color6">#3E3E3E</color>
     <color name="app_color7">#005D4F</color>
     <color name="app_color8">#07A189</color>

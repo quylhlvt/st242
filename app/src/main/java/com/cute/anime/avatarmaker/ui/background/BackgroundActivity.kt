@@ -346,6 +346,7 @@ class BackgroundActivity : AbsBaseActivity<ActivityBackgroundBinding>() {
             btnReset.onSingleClick {
                 viewModel.setIsFocusEditText(false)
                 hideKeyboard()
+                binding.iclText.edt.clearFocus()
                 var dialog = DialogExit(
                     this@BackgroundActivity,
                     "reset"
@@ -384,6 +385,9 @@ class BackgroundActivity : AbsBaseActivity<ActivityBackgroundBinding>() {
                         }
                     }
                     dialog.dismiss()
+                    binding.iclText.edt.clearFocus()
+                    viewModel.setIsFocusEditText(false)
+                    hideKeyboard()
                 }
                 dialog.show()
             }
