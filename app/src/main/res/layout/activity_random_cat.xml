@@ -154,7 +154,7 @@
 
 
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:id="@+id/tv1"
                 style="@style/single_marquee"
                 android:layout_width="0dp"

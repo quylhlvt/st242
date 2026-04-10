@@ -120,7 +120,7 @@
                         android:layout_height="match_parent">
 
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:paddingHorizontal="5dp"
                             android:id="@+id/tv1"
                             style="@style/single_marquee"
@@ -168,7 +168,7 @@
                         android:background="@drawable/img_frame_home"
                         android:layout_height="match_parent">
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/tv2"
                             style="@style/single_marquee"
                             android:layout_width="0dp"
@@ -217,7 +217,7 @@
                         android:layout_height="match_parent">
 
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/tv3"
                             style="@style/single_marquee"
                             android:layout_width="0dp"
@@ -265,7 +265,7 @@
                         android:background="@drawable/img_frame_home"
                         android:layout_height="match_parent">
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/tv4"
                             style="@style/single_marquee"
                             android:layout_width="0dp"

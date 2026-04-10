@@ -1,4 +1,4 @@
-package com.cute.anime.avatarmaker
+package com.anime.couple.couplemaker
 
 import org.junit.Assert
 import org.junit.Test

@@ -60,7 +60,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent" />
 
-          <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+          <com.anime.couple.couplemaker.utils.OuterStrokeTextView
               android:id="@+id/tv2"
               android:layout_width="match_parent"
               android:layout_height="0dp"

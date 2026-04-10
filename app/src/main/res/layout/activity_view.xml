@@ -91,7 +91,7 @@
                 android:background="@drawable/img_frame_mywork1_1"
                 >
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tvEditShare"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -121,7 +121,7 @@
                 android:gravity="center"
                 >
                
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tvDownload"
                     android:layout_width="0dp"
                     android:layout_height="0dp"

@@ -135,7 +135,7 @@
 
 
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tvMyWork"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -166,7 +166,7 @@
                 >
 
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tvDownload"
                     android:layout_width="0dp"
                     android:layout_height="0dp"

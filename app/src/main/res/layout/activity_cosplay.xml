@@ -180,7 +180,7 @@
                     app:layout_constraintTop_toTopOf="@+id/img_share1_1_frame" />
 
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tv1"
                     style="@style/single_marquee"
                     android:layout_width="0dp"
@@ -242,7 +242,7 @@
                     app:layout_constraintTop_toTopOf="@+id/img_cosplay1_1_frame" />
 
 
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/tv2"
                     style="@style/single_marquee"
                     android:layout_width="0dp"
@@ -307,7 +307,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-                <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                     android:id="@+id/txtTitle"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"

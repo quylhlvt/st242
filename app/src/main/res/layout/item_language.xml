@@ -6,7 +6,7 @@
 
         <variable
             name="languageModel"
-            type="com.cute.anime.avatarmaker.data.model.LanguageModel" />
+            type="com.anime.couple.couplemaker.data.model.LanguageModel" />
     </data>
 
 

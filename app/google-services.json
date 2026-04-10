@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "111859859192",
-    "project_id": "st226-cuteanimeavatarmaker",
-    "storage_bucket": "st226-cuteanimeavatarmaker.firebasestorage.app"
+    "project_number": "849877556226",
+    "project_id": "st242-anime-couple-maker",
+    "storage_bucket": "st242-anime-couple-maker.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:111859859192:android:9e703b79b8ddaad001050d",
+        "mobilesdk_app_id": "1:849877556226:android:362a1594f39529d96c5b1b",
         "android_client_info": {
-          "package_name": "com.cute.anime.avatarmaker"
+          "package_name": "com.anime.couple.couplemaker"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCdztl_Vr8BLg3F2N_kF55uQA_p98TavWc"
+          "current_key": "AIzaSyAA7ZmYNNLtb1-dpFZj8zEfrqOC3C4xXdc"
         }
       ],
       "services": {

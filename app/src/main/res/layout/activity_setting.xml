@@ -60,7 +60,7 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_lang_set" />
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -90,7 +90,7 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_reate_set" />
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +120,7 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_share_set" />
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -150,7 +150,7 @@
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_policy_set" />
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

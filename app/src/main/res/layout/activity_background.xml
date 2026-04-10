@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/llTop"
             >
 
-            <com.cute.anime.avatarmaker.custom.DrawView
+            <com.anime.couple.couplemaker.custom.DrawView
                 android:id="@+id/drawView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -109,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY" />
 
-            </com.cute.anime.avatarmaker.custom.DrawView>
+            </com.anime.couple.couplemaker.custom.DrawView>
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
@@ -270,7 +270,7 @@
                         <!--                            android:layout_marginVertical="12dp"-->
                         <!--                            android:id="@+id/imgInLoading"-->
                         <!--                            android:src="@drawable/img_in_loading"/>-->
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/txtTitle"
                             style="@style/single_marquee"
                             android:layout_width="0dp"

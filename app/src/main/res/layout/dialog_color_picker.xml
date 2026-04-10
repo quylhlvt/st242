@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp">
 
-            <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+            <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                 android:id="@+id/tvTitle"
                 style="@style/single_marquee"
                 android:layout_width="0dp"
@@ -97,7 +97,7 @@
 
 
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/txtDone"
                             style="@style/single_marquee"
                             android:layout_width="0dp"
@@ -134,7 +134,7 @@
                         app:layout_constraintTop_toTopOf="@+id/btnDone">
 
 
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/txtCancel"
                             style="@style/single_marquee"
                             android:layout_width="0dp"

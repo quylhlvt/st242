@@ -9,16 +9,16 @@ plugins {
 }
 
 android {
-    namespace 'com.cute.anime.avatarmaker'
+    namespace 'com.anime.couple.couplemaker'
     compileSdk 36
     defaultConfig {
-        applicationId "com.cute.anime.avatarmaker"
+        applicationId "com.anime.couple.couplemaker"
         minSdk 24
         targetSdk 36
         versionCode 1
         versionName "1.0.0"
         def formattedDate = new Date().format('MM.dd.yyyy')
-        archivesBaseName = "Cute_Anime_Avatar_Maker${versionName}_${formattedDate}"
+        archivesBaseName = "ST242_Anime_Couple_Maker_Dress_Up_${versionName}_${formattedDate}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

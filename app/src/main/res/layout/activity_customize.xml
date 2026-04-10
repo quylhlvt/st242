@@ -404,7 +404,7 @@
                         <!--                            android:layout_marginVertical="12dp"-->
                         <!--                            android:id="@+id/imgInLoading"-->
                         <!--                            android:src="@drawable/img_in_loading"/>-->
-                        <com.cute.anime.avatarmaker.utils.OuterStrokeTextView
+                        <com.anime.couple.couplemaker.utils.OuterStrokeTextView
                             android:id="@+id/txtTitle"
                             style="@style/single_marquee"
                             android:layout_width="0dp"

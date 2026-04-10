@@ -1,4 +1,4 @@
-package com.cute.anime.avatarmaker
+package com.anime.couple.couplemaker
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.cute.anime.avatarmaker", appContext.packageName)
+        assertEquals("com.anime.couple.couplemaker", appContext.packageName)
     }
 }
