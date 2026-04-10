@@ -40,5 +40,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Cute Anime Avatar Maker"
+rootProject.name = "ST242 Anime Couple Maker Dress Up"
 include ':app'
